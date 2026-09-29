@@ -1,0 +1,23 @@
+.frame {
+  position: relative;
+
+  width: min(
+    calc(100% - 48px),
+    var(--container-width)
+  );
+
+  margin: 24px auto;
+
+  overflow: hidden;
+
+  background: var(--background);
+}
+
+@media (max-width: 768px) {
+  .frame {
+    width: calc(100% - 24px);
+    margin: 12px auto;
+
+    border-radius: 20px;
+  }
+}
