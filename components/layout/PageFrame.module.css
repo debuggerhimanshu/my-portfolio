@@ -1,20 +1,12 @@
 .frame {
   position: relative;
-
   width: 100%;
-
-  overflow: hidden;
+  overflow: visible;
 }
 
 .content {
   position: relative;
-
-  width: min(
-    calc(100% - 48px),
-    var(--container-width)
-  );
-
+  width: min(calc(100% - 48px), var(--container-width));
   margin: 24px auto;
-
   z-index: 1;
 }

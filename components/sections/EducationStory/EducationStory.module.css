@@ -1,0 +1,205 @@
+.story {
+  position: relative;
+
+  width: 100%;
+  height: 350vh;
+
+  background: var(--background);
+}
+
+/* --------------------------------
+   Sticky Stage
+-------------------------------- */
+
+.stickyStage {
+  position: sticky;
+  top: 0;
+
+  width: 100%;
+  height: 100vh;
+
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+}
+
+/* --------------------------------
+   Main Content
+-------------------------------- */
+
+.content {
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+
+  align-items: center;
+
+  gap: 80px;
+
+  padding: 0 7%;
+}
+
+/* --------------------------------
+   Story Text
+-------------------------------- */
+
+.textWrapper {
+  width: 100%;
+  max-width: 680px;
+}
+
+.storyText {
+  margin: 0;
+
+  color: #555555;
+
+  font-size: clamp(32px, 4vw, 60px);
+  font-weight: 400;
+
+  line-height: 1.08;
+
+  letter-spacing: -0.05em;
+}
+
+.word {
+  display: inline;
+
+  will-change: color;
+}
+
+/* --------------------------------
+   Image Frame
+-------------------------------- */
+
+.imageFrame {
+  position: relative;
+
+  width: min(100%, 420px);
+  aspect-ratio: 4 / 5;
+
+  justify-self: end;
+
+  overflow: hidden;
+
+  border-radius: 26px;
+
+  background: #161616;
+
+  isolation: isolate;
+}
+
+/* --------------------------------
+   Image Cards
+-------------------------------- */
+
+.imageCard {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+
+  border-radius: inherit;
+
+  background: #222222;
+
+  will-change: transform;
+}
+
+.imageCard img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  user-select: none;
+  pointer-events: none;
+}
+
+/* --------------------------------
+   Tablet
+-------------------------------- */
+
+@media (max-width: 1000px) {
+  .content {
+    grid-template-columns: 1fr 0.85fr;
+
+    gap: 50px;
+
+    padding: 0 5%;
+  }
+
+  .storyText {
+    font-size: clamp(30px, 4.5vw, 52px);
+  }
+
+  .imageFrame {
+    width: min(100%, 380px);
+  }
+}
+
+/* --------------------------------
+   Mobile
+-------------------------------- */
+
+@media (max-width: 800px) {
+  .story {
+    height: 300vh;
+  }
+
+  .stickyStage {
+    height: 100svh;
+  }
+
+  .content {
+    grid-template-columns: 1fr;
+
+    gap: 42px;
+
+    padding: 0 24px;
+  }
+
+  .textWrapper {
+    max-width: 100%;
+  }
+
+  .storyText {
+    font-size: clamp(32px, 9vw, 48px);
+
+    line-height: 1.05;
+  }
+
+  .imageFrame {
+    width: min(100%, 360px);
+
+    justify-self: start;
+
+    aspect-ratio: 4 / 5;
+  }
+}
+
+/* --------------------------------
+   Small Mobile
+-------------------------------- */
+
+@media (max-width: 500px) {
+  .content {
+    gap: 32px;
+
+    padding: 0 18px;
+  }
+
+  .storyText {
+    font-size: clamp(30px, 9.5vw, 42px);
+  }
+
+  .imageFrame {
+    width: 100%;
+  }
+}

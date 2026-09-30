@@ -3,6 +3,7 @@ import { Navbar } from "@/components/ui/Navbar";
 import { Hero } from "@/components/sections/Hero/Hero";
 import { About } from "@/components/sections/About/About";
 import { Education } from "@/components/sections/Education/Education";
+import { EducationStory } from "@/components/sections/EducationStory/EducationStory";
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
           <Hero />
           <About />
           <Education />
+          <EducationStory />
       </main>
     </PageFrame>
   );
