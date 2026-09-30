@@ -75,15 +75,16 @@
   gap: 14px;
 }
 
-/* --------------------------------
-   Skill cards
--------------------------------- */
+/* =========================================================
+   SKILL CARDS
+========================================================= */
 
 .skillCard {
   position: relative;
 
   min-width: 0;
   overflow: hidden;
+  isolation: isolate;
 
   padding: 24px;
 
@@ -91,7 +92,61 @@
   border-radius: var(--radius-medium);
 
   background: var(--surface);
+
+  color: var(--foreground);
+
+  transition:
+    border-color 350ms ease,
+    color 350ms ease;
 }
+
+/* =========================================================
+   HIGHLIGHT CIRCLE
+========================================================= */
+
+.skillCard::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background: var(--foreground);
+
+  border-radius: inherit;
+
+  /*
+    Start from the bottom-left corner.
+  */
+  clip-path: circle(0% at 0% 100%);
+
+  z-index: 0;
+
+  pointer-events: none;
+}
+
+/* --------------------------------
+   Expanding circle animation
+-------------------------------- */
+
+.skillCard.active::before {
+  animation: cardHighlight 1.4s
+    cubic-bezier(0.16, 1, 0.3, 1)
+    forwards;
+}
+
+@keyframes cardHighlight {
+  0% {
+    clip-path: circle(0% at 0% 100%);
+  }
+
+  100% {
+    clip-path: circle(150% at 0% 100%);
+  }
+}
+
+/* =========================================================
+   CARD CONTENT LAYERS
+========================================================= */
 
 .cardNumber {
   position: absolute;
@@ -103,9 +158,16 @@
 
   font-family: monospace;
   font-size: 10px;
+
+  z-index: 2;
+
+  transition: color 350ms ease;
 }
 
 .cardContent {
+  position: relative;
+  z-index: 2;
+
   height: 100%;
 
   display: flex;
@@ -122,6 +184,8 @@
 
   font-size: 17px;
   letter-spacing: -0.035em;
+
+  transition: color 350ms ease;
 }
 
 .cardContent p {
@@ -132,29 +196,51 @@
   font-family: monospace;
   font-size: 10.5px;
   line-height: 1.65;
+
+  transition: color 350ms ease;
 }
 
-/* --------------------------------
-   Programming
--------------------------------- */
+/* =========================================================
+   ACTIVE CARD
+========================================================= */
+
+.skillCard.active {
+  border-color: var(--foreground);
+}
+
+.skillCard.active .cardNumber {
+  color: rgba(13, 13, 13, 0.45);
+}
+
+.skillCard.active .cardLabel {
+  color: var(--background);
+}
+
+.skillCard.active .cardContent p {
+  color: rgba(13, 13, 13, 0.62);
+}
+
+/* =========================================================
+   PROGRAMMING
+========================================================= */
 
 .programming {
   grid-column: 1 / 2;
   grid-row: 1 / 2;
 }
 
-/* --------------------------------
-   Development
--------------------------------- */
+/* =========================================================
+   DEVELOPMENT
+========================================================= */
 
 .development {
   grid-column: 2 / 3;
   grid-row: 1 / 2;
 }
 
-/* --------------------------------
-   Photo
--------------------------------- */
+/* =========================================================
+   PHOTO
+========================================================= */
 
 .photoCard {
   grid-column: 3 / 4;
@@ -177,9 +263,9 @@
   object-position: center 25%;
 }
 
-/* --------------------------------
-   Zodiac Wave
--------------------------------- */
+/* =========================================================
+   ZODIAC WAVE
+========================================================= */
 
 .zodiacWave {
   grid-column: 3 / 4;
@@ -222,12 +308,11 @@
   font-weight: 400;
 
   line-height: 0.9;
-  /* letter-spacing: -0.045em; */
 }
 
-/* --------------------------------
-   AI / Data / Cloud
--------------------------------- */
+/* =========================================================
+   AI / DATA / CLOUD
+========================================================= */
 
 .aiCloud {
   grid-column: 1 / 3;
@@ -248,7 +333,10 @@
 
   padding: 20px 24px;
 
-  /* Allow the note to sit outside the card */
+  /*
+    The card itself needs to allow the
+    Creative / Visual note outside it.
+  */
   overflow: visible;
 }
 
@@ -260,21 +348,16 @@
   margin-bottom: 8px;
 }
 
-/* --------------------------------
-   Creative note
--------------------------------- */
-
-/*
-   The Creative card is in column 2.
-   Move the note into the empty column 1
-   beside it.
-*/
+/* =========================================================
+   CREATIVE NOTE
+========================================================= */
 
 .creativeNote {
   position: absolute;
 
   right: calc(100% + 60px);
   top: 50%;
+
   transform: translateY(-50%);
 
   width: 220px;
@@ -303,7 +386,6 @@
   text-transform: uppercase;
 }
 
-/* Remove the decorative star */
 .creativeNote::before {
   display: none;
 }
@@ -358,7 +440,6 @@
     overflow: hidden;
   }
 
-  /* Don't push the note outside on tablet */
   .creativeNote {
     position: static;
 

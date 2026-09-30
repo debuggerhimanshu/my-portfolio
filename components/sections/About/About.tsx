@@ -1,7 +1,22 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import styles from "./About.module.css";
-import { PageDecorations } from "@/components/effects/PageDecorations";
 
 export function About() {
+  const [activeCard, setActiveCard] = useState(0);
+  const [isHovering, setIsHovering] = useState(false);
+
+  useEffect(() => {
+    if (isHovering) return;
+
+    const interval = setInterval(() => {
+      setActiveCard((current) => (current + 1) % 4);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [isHovering]);
+
   return (
     <section id="about" className={styles.about}>
       <div className={styles.aboutHeader}>
@@ -24,7 +39,16 @@ export function About() {
 
       <div className={styles.aboutGrid}>
         {/* Programming */}
-        <article className={`${styles.skillCard} ${styles.programming}`}>
+        <article
+          className={`${styles.skillCard} ${styles.programming} ${
+            activeCard === 0 ? styles.active : ""
+          }`}
+          onMouseEnter={() => {
+            setActiveCard(0);
+            setIsHovering(true);
+          }}
+          onMouseLeave={() => setIsHovering(false)}
+        >
           <span className={styles.cardNumber}>01</span>
 
           <div className={styles.cardContent}>
@@ -39,7 +63,16 @@ export function About() {
         </article>
 
         {/* Development */}
-        <article className={`${styles.skillCard} ${styles.development}`}>
+        <article
+          className={`${styles.skillCard} ${styles.development} ${
+            activeCard === 1 ? styles.active : ""
+          }`}
+          onMouseEnter={() => {
+            setActiveCard(1);
+            setIsHovering(true);
+          }}
+          onMouseLeave={() => setIsHovering(false)}
+        >
           <span className={styles.cardNumber}>02</span>
 
           <div className={styles.cardContent}>
@@ -64,17 +97,26 @@ export function About() {
 
         {/* Zodiac Wave */}
         <div className={styles.zodiacWave}>
-            <div className={styles.zodiac}>
-                {"ZODIAC".split("").map((letter, index) => (
-                <span key={index}>{letter}</span>
-                ))}
-            </div>
+          <div className={styles.zodiac}>
+            {"ZODIAC".split("").map((letter, index) => (
+              <span key={index}>{letter}</span>
+            ))}
+          </div>
 
-            <div className={styles.wave}>Wave</div>
+          <div className={styles.wave}>Wave</div>
         </div>
 
         {/* AI / Data / Cloud */}
-        <article className={`${styles.skillCard} ${styles.aiCloud}`}>
+        <article
+          className={`${styles.skillCard} ${styles.aiCloud} ${
+            activeCard === 2 ? styles.active : ""
+          }`}
+          onMouseEnter={() => {
+            setActiveCard(2);
+            setIsHovering(true);
+          }}
+          onMouseLeave={() => setIsHovering(false)}
+        >
           <span className={styles.cardNumber}>03</span>
 
           <div className={styles.cardContent}>
@@ -89,7 +131,16 @@ export function About() {
         </article>
 
         {/* Creative / Tools */}
-        <article className={`${styles.skillCard} ${styles.creative}`}>
+        <article
+          className={`${styles.skillCard} ${styles.creative} ${
+            activeCard === 3 ? styles.active : ""
+          }`}
+          onMouseEnter={() => {
+            setActiveCard(3);
+            setIsHovering(true);
+          }}
+          onMouseLeave={() => setIsHovering(false)}
+        >
           <span className={styles.cardNumber}>04</span>
 
           <div className={styles.cardContent}>
