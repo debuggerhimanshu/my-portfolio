@@ -1,0 +1,455 @@
+.about {
+  position: relative;
+  width: 100%;
+  padding: 105px 42px 110px;
+
+  overflow: hidden;
+}
+
+/* --------------------------------
+   Header
+-------------------------------- */
+
+.aboutHeader {
+  position: relative;
+  z-index: 1;
+
+  display: grid;
+  grid-template-columns: 28% 1fr;
+  gap: 40px;
+  margin-bottom: 52px;
+}
+
+.eyebrow {
+  color: var(--muted);
+  font-family: monospace;
+  font-size: 12px;
+  letter-spacing: -0.02em;
+}
+
+.introduction {
+  max-width: 760px;
+}
+
+.introMain {
+  max-width: 720px;
+  margin: 0;
+
+  color: var(--foreground);
+
+  font-size: clamp(26px, 2.4vw, 36px);
+  line-height: 1.12;
+  letter-spacing: -0.05em;
+}
+
+.introSecondary {
+  max-width: 560px;
+  margin: 28px 0 0;
+
+  color: var(--muted);
+
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+/* =========================================================
+   ABOUT GRID
+========================================================= */
+
+.aboutGrid {
+  position: relative;
+  z-index: 1;
+
+  display: grid;
+
+  grid-template-columns:
+    1.1fr
+    0.9fr
+    1.1fr;
+
+  grid-template-rows:
+    165px
+    165px
+    135px;
+
+  gap: 14px;
+}
+
+/* --------------------------------
+   Skill cards
+-------------------------------- */
+
+.skillCard {
+  position: relative;
+
+  min-width: 0;
+  overflow: hidden;
+
+  padding: 24px;
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius-medium);
+
+  background: var(--surface);
+}
+
+.cardNumber {
+  position: absolute;
+
+  top: 22px;
+  right: 22px;
+
+  color: var(--subtle);
+
+  font-family: monospace;
+  font-size: 10px;
+}
+
+.cardContent {
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.cardLabel {
+  display: block;
+
+  margin-bottom: 10px;
+
+  color: var(--foreground);
+
+  font-size: 17px;
+  letter-spacing: -0.035em;
+}
+
+.cardContent p {
+  margin: 0;
+
+  color: var(--muted);
+
+  font-family: monospace;
+  font-size: 10.5px;
+  line-height: 1.65;
+}
+
+/* --------------------------------
+   Programming
+-------------------------------- */
+
+.programming {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+}
+
+/* --------------------------------
+   Development
+-------------------------------- */
+
+.development {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+}
+
+/* --------------------------------
+   Photo
+-------------------------------- */
+
+.photoCard {
+  grid-column: 3 / 4;
+  grid-row: 1 / 3;
+
+  overflow: hidden;
+
+  border-radius: var(--radius-large);
+
+  background: #161616;
+}
+
+.photo {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+  object-position: center 25%;
+}
+
+/* --------------------------------
+   Zodiac Wave
+-------------------------------- */
+
+.zodiacWave {
+  grid-column: 3 / 4;
+  grid-row: 3 / 4;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  padding-top: 4px;
+
+  overflow: hidden;
+}
+
+.zodiac {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  color: rgba(255, 255, 255, 0.62);
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(58px, 5.2vw, 88px);
+  font-weight: 400;
+
+  line-height: 0.9;
+  white-space: nowrap;
+}
+
+.wave {
+  margin-top: 8px;
+  margin-right: 4px;
+
+  color: var(--foreground);
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(42px, 3.8vw, 64px);
+  font-weight: 400;
+
+  line-height: 0.9;
+  /* letter-spacing: -0.045em; */
+}
+
+/* --------------------------------
+   AI / Data / Cloud
+-------------------------------- */
+
+.aiCloud {
+  grid-column: 1 / 3;
+  grid-row: 2 / 3;
+}
+
+/* =========================================================
+   CREATIVE / TOOLS
+========================================================= */
+
+.creative {
+  position: relative;
+
+  grid-column: 2 / 3;
+  grid-row: 3 / 4;
+
+  min-height: 135px;
+
+  padding: 20px 24px;
+
+  /* Allow the note to sit outside the card */
+  overflow: visible;
+}
+
+.creative .cardContent {
+  justify-content: center;
+}
+
+.creative .cardLabel {
+  margin-bottom: 8px;
+}
+
+/* --------------------------------
+   Creative note
+-------------------------------- */
+
+/*
+   The Creative card is in column 2.
+   Move the note into the empty column 1
+   beside it.
+*/
+
+.creativeNote {
+  position: absolute;
+
+  right: calc(100% + 60px);
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 220px;
+
+  color: var(--muted);
+
+  font-size: 12px;
+  line-height: 1.55;
+
+  text-align: left;
+
+  z-index: 10;
+}
+
+.creativeNote span {
+  display: block;
+
+  margin-bottom: 10px;
+
+  color: var(--subtle);
+
+  font-family: monospace;
+  font-size: 10px;
+
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Remove the decorative star */
+.creativeNote::before {
+  display: none;
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+  .about {
+    padding: 120px 28px 90px;
+  }
+
+  .aboutHeader {
+    grid-template-columns: 22% 1fr;
+  }
+
+  .aboutGrid {
+    grid-template-columns: 1fr 1fr;
+
+    grid-template-rows:
+      165px
+      165px
+      135px
+      135px;
+  }
+
+  .programming {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+  }
+
+  .development {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+  }
+
+  .aiCloud {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+  }
+
+  .photoCard {
+    grid-column: 2 / 3;
+    grid-row: 2 / 4;
+  }
+
+  .creative {
+    grid-column: 1 / 2;
+    grid-row: 3 / 4;
+
+    overflow: hidden;
+  }
+
+  /* Don't push the note outside on tablet */
+  .creativeNote {
+    position: static;
+
+    width: auto;
+
+    margin-top: 16px;
+  }
+
+  .creativeNote::before {
+    display: none;
+  }
+
+  .skillCard {
+    padding: 22px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+  .about {
+    padding: 100px 18px 70px;
+  }
+
+  .aboutHeader {
+    display: block;
+    margin-bottom: 50px;
+  }
+
+  .eyebrow {
+    display: block;
+    margin-bottom: 30px;
+  }
+
+  .introMain {
+    font-size: clamp(28px, 8vw, 40px);
+  }
+
+  .introSecondary {
+    margin-top: 22px;
+    font-size: 14px;
+  }
+
+  .aboutGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .skillCard {
+    min-height: 170px;
+  }
+
+  .photoCard {
+    height: 360px;
+    order: 3;
+  }
+
+  .programming {
+    order: 1;
+  }
+
+  .development {
+    order: 2;
+  }
+
+  .aiCloud {
+    order: 4;
+  }
+
+  .creative {
+    order: 5;
+
+    min-height: 170px;
+
+    padding: 24px;
+
+    overflow: hidden;
+  }
+
+  .creativeNote {
+    position: static;
+
+    width: auto;
+
+    margin-top: 18px;
+  }
+
+  .creativeNote::before {
+    display: none;
+  }
+}

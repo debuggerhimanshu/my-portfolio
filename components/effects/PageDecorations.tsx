@@ -1,10 +1,28 @@
 import styles from "./PageDecorations.module.css";
 
-export function PageDecorations() {
+interface PageDecorationsProps {
+  variant?: "page" | "about";
+}
+
+export function PageDecorations({
+  variant = "page",
+}: PageDecorationsProps) {
   return (
-    <div className={styles.decorations} aria-hidden="true">
-      <div className={`${styles.circle} ${styles.circleTop}`} />
-      <div className={`${styles.circle} ${styles.circleRight}`} />
+    <div
+      className={`${styles.decorations} ${styles[variant]}`}
+      aria-hidden="true"
+    >
+      {variant === "page" && (
+        <>
+          <div className={`${styles.circle} ${styles.circleTop}`} />
+          <div className={`${styles.circle} ${styles.circleRight}`} />
+          <div className={`${styles.circle} ${styles.circleBottomLeft}`} />
+        </>
+      )}
+
+      {variant === "about" && (
+        <div className={`${styles.circle} ${styles.circleAbout}`} />
+      )}
     </div>
   );
 }
