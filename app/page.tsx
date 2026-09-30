@@ -1,5 +1,6 @@
 import { PageFrame } from "@/components/layout/PageFrame";
 import { Navbar } from "@/components/ui/Navbar";
+import { Hero } from "@/components/sections/Hero/Hero";
 
 export default function Home() {
   return (
@@ -7,7 +8,7 @@ export default function Home() {
       <Navbar />
 
       <main>
-
+          <Hero />
       </main>
     </PageFrame>
   );

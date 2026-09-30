@@ -1,6 +1,14 @@
 .frame {
   position: relative;
 
+  width: 100%;
+
+  overflow: hidden;
+}
+
+.content {
+  position: relative;
+
   width: min(
     calc(100% - 48px),
     var(--container-width)
@@ -8,16 +16,5 @@
 
   margin: 24px auto;
 
-  overflow: hidden;
-
-  background: var(--background);
-}
-
-@media (max-width: 768px) {
-  .frame {
-    width: calc(100% - 24px);
-    margin: 12px auto;
-
-    border-radius: 20px;
-  }
+  z-index: 1;
 }
