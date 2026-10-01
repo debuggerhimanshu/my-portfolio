@@ -1,0 +1,310 @@
+.projects {
+  position: relative;
+
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+
+  padding: 0 7vw 100px;
+
+  background: #ffffff;
+  color: #0d0d0d;
+}
+
+/* ─────────────────────────────
+   TOP BORDER
+───────────────────────────── */
+
+.topBorder {
+  width: 100%;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+/* ─────────────────────────────
+   HEADER
+───────────────────────────── */
+
+.header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+
+  width: min(1380px, 100%);
+  margin: 0 auto;
+
+  padding-top: 50px;
+  padding-bottom: 42px;
+}
+
+
+.headerCopy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.eyebrow {
+  margin-bottom: 10px;
+  color: rgb(67, 67, 67);
+  font-family: monospace;
+  font-size: 12px;
+  letter-spacing: -0.02em;
+}
+
+.description {
+  width: 100%;
+  max-width: 560px;
+
+  margin: 0;
+  padding-right: 0;
+
+  color: #323232;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(17px, 1.45vw, 21px);
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: -0.035em;
+}
+
+.title {
+  margin: 0;
+
+  color: inherit;
+
+  font-family: "Harabara", Arial, Helvetica, sans-serif;
+  font-size: clamp(48px, 4.8vw, 68px);
+  font-weight: 400;
+  line-height: 0.95;
+
+  justify-self: end;
+  align-self: end;
+
+  text-align: right;
+}
+
+.projects ::selection {
+  background: #000000;
+  color: #ffffff;
+}
+
+/* ─────────────────────────────
+   PROJECT GRID
+───────────────────────────── */
+
+.projectGrid {
+  width: min(1320px, 100%);
+
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 2.2fr)
+    minmax(0, 0.78fr)
+    minmax(0, 1.15fr);
+
+  grid-template-rows:
+    1fr
+    1fr;
+
+  gap: 14px;
+
+  height: 500px;
+}
+
+/* ─────────────────────────────
+   CARDS
+───────────────────────────── */
+
+.projectCard {
+  position: relative;
+
+  min-width: 0;
+  min-height: 0;
+
+  overflow: hidden;
+
+  border-radius: 20px;
+
+  background: #d8d8d8;
+}
+
+/* Large left card */
+
+.projectLarge {
+  grid-column: 1;
+  grid-row: 1 / 3;
+}
+
+/* Tall middle card */
+
+.projectTall {
+  grid-column: 2;
+  grid-row: 1 / 3;
+}
+
+/* Top-right */
+
+.projectSmall:nth-child(3) {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+/* Bottom-right */
+
+.projectSmall:nth-child(4) {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+/* ─────────────────────────────
+   PLACEHOLDER
+───────────────────────────── */
+
+.projectPlaceholder {
+  position: absolute;
+
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: rgba(13, 13, 13, 0);
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+
+  background: #d8d8d8;
+}
+
+/* ─────────────────────────────
+   GITHUB
+───────────────────────────── */
+
+.githubWrapper {
+  display: flex;
+  justify-content: center;
+
+  padding-top: 42px;
+}
+
+.githubButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 330px;
+  height: 88px;
+
+  border-radius: 999px;
+
+  background: #d8d8d8;
+  color: #0d0d0d;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+
+  transition:
+    transform 250ms ease,
+    background 250ms ease;
+}
+
+.githubButton:hover {
+  transform: translateY(-4px);
+
+  background: #eeeeee;
+}
+
+/* ─────────────────────────────
+   TABLET
+───────────────────────────── */
+
+@media (max-width: 900px) {
+  .projects {
+    padding: 0 5vw 90px;
+  }
+
+  .header {
+    padding: 45px 0 45px;
+  }
+
+  .projectGrid {
+    height: 450px;
+
+    grid-template-columns:
+      minmax(0, 1.8fr)
+      minmax(0, 0.8fr)
+      minmax(0, 1.1fr);
+  }
+
+  .githubButton {
+    width: 280px;
+    height: 72px;
+
+    font-size: 21px;
+  }
+}
+
+/* ─────────────────────────────
+   MOBILE
+───────────────────────────── */
+
+@media (max-width: 650px) {
+  .projects {
+    padding: 0 18px 70px;
+  }
+
+  .header {
+    padding: 38px 0 32px;
+  }
+
+  .title {
+    font-size: clamp(58px, 18vw, 86px);
+  }
+
+  .projectGrid {
+    height: auto;
+
+    grid-template-columns: 1fr;
+
+    grid-template-rows: none;
+
+    gap: 12px;
+  }
+
+  .projectCard {
+    min-height: 260px;
+  }
+
+  .projectLarge,
+  .projectTall,
+  .projectSmall:nth-child(3),
+  .projectSmall:nth-child(4) {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .projectLarge {
+    min-height: 360px;
+  }
+
+  .projectTall {
+    min-height: 360px;
+  }
+
+  .githubWrapper {
+    padding-top: 30px;
+  }
+
+  .githubButton {
+    width: 100%;
+    max-width: 330px;
+
+    height: 68px;
+
+    font-size: 20px;
+  }
+}
