@@ -1,8 +1,13 @@
 "use client";
 
-import { useLayoutEffect, useRef, useState } from "react";
+import {
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import gsap from "gsap";
 import { Flip } from "gsap/Flip";
+import { SiGithub } from "react-icons/si";
 import styles from "./Projects.module.css";
 
 gsap.registerPlugin(Flip);
@@ -12,6 +17,8 @@ type Project = {
   title: string;
   description: string;
   image: string;
+  github: string;
+  details: string;
 };
 
 const projects: Project[] = [
@@ -20,58 +27,88 @@ const projects: Project[] = [
     title: "CampusFlow",
     description: "Event management platform",
     image: "/projects/campusflow.jpg",
+    github: "https://github.com/debuggerhimanshu",
+    details:
+      "A full-stack event management platform designed to simplify event discovery, registration, organization, and participation for students.",
   },
   {
     id: "deeptrust",
     title: "DeepTrust",
     description: "AI powered deepfake detection",
     image: "/projects/deeptrust.jpg",
+    github: "https://github.com/debuggerhimanshu",
+    details:
+      "An AI-based deepfake detection system that analyzes visual and audio signals to identify manipulated media.",
   },
   {
     id: "ciphernote",
     title: "CipherNote",
     description: "Encrypted digital notebook",
     image: "/projects/ciphernote.jpg",
+    github: "https://github.com/debuggerhimanshu",
+    details:
+      "A privacy-focused digital notebook concept built around secure storage and encrypted personal notes.",
   },
   {
     id: "portfolio",
     title: "Portfolio",
     description: "Creative developer portfolio",
     image: "/projects/portfolio.jpg",
+    github: "https://github.com/debuggerhimanshu",
+    details:
+      "A creative developer portfolio combining interactive web experiences, development, visual design, and motion.",
   },
 ];
 
 export function Projects() {
   const gridRef = useRef<HTMLDivElement>(null);
 
-  const [activeProject, setActiveProject] = useState<string | null>(null);
-
   /*
-   * Current active layout.
+   * =====================================================
+   * EXISTING HOVER / FLIP STATE
+   * =====================================================
    */
+
+  const [activeProject, setActiveProject] =
+    useState<string | null>(null);
+
   const activeRef = useRef<string | null>(null);
 
-  /*
-   * Current GSAP Flip animation.
-   */
-  const flipRef = useRef<gsap.core.Timeline | null>(null);
+  const flipRef =
+    useRef<gsap.core.Timeline | null>(null);
 
-  /*
-   * Prevent hover changes while the layout is moving.
-   */
   const isAnimatingRef = useRef(false);
 
-  /*
-   * Store the latest pointer position.
-   *
-   * We intentionally don't determine the card
-   * underneath the cursor while the animation is running.
-   */
   const pointerRef = useRef({
     x: 0,
     y: 0,
     insideGrid: false,
   });
+
+  /*
+   * =====================================================
+   * PROJECT DETAIL DRAWER STATE
+   * =====================================================
+   */
+
+  const [selectedProject, setSelectedProject] =
+    useState<Project | null>(null);
+
+  const selectedProjectRef =
+    useRef<Project | null>(null);
+
+  const detailTimelineRef =
+    useRef<gsap.core.Timeline | null>(null);
+
+  const detailEnterEndRef = useRef(0);
+
+  const detailOpenRef = useRef(false);
+
+  /*
+   * =====================================================
+   * EXISTING HOVER / FLIP HELPERS
+   * =====================================================
+   */
 
   useLayoutEffect(() => {
     const grid = gridRef.current;
@@ -83,12 +120,6 @@ export function Projects() {
         "[data-project-card]"
       )
     );
-
-    /*
-     * =====================================================
-     * LAYOUT CLASS HELPERS
-     * =====================================================
-     */
 
     const clearLayoutClasses = () => {
       grid.classList.remove(
@@ -118,53 +149,40 @@ export function Projects() {
       }
     };
 
-    /*
-     * =====================================================
-     * POINTER / CARD DETECTION
-     * =====================================================
-     *
-     * This function is ONLY called when the layout has
-     * finished moving.
-     *
-     * That is important.
-     */
-
     const getCardUnderPointer = () => {
-      const { x, y, insideGrid } = pointerRef.current;
+      const {
+        x,
+        y,
+        insideGrid,
+      } = pointerRef.current;
 
       if (!insideGrid) {
         return null;
       }
 
-      const element = document.elementFromPoint(x, y);
+      const element =
+        document.elementFromPoint(x, y);
 
       if (!(element instanceof HTMLElement)) {
         return null;
       }
 
-      const card = element.closest<HTMLElement>(
-        "[data-project-card]"
-      );
+      const card =
+        element.closest<HTMLElement>(
+          "[data-project-card]"
+        );
 
       return card?.dataset.projectCard ?? null;
     };
-
-    /*
-     * =====================================================
-     * CHECK WHERE POINTER ENDED UP
-     * =====================================================
-     */
 
     const resolvePointerState = () => {
       if (isAnimatingRef.current) {
         return;
       }
 
-      const cardUnderPointer = getCardUnderPointer();
+      const cardUnderPointer =
+        getCardUnderPointer();
 
-      /*
-       * Cursor is over another project.
-       */
       if (
         cardUnderPointer &&
         cardUnderPointer !== activeRef.current
@@ -173,10 +191,6 @@ export function Projects() {
         return;
       }
 
-      /*
-       * Cursor is inside the grid but not over
-       * any card.
-       */
       if (!cardUnderPointer) {
         if (activeRef.current) {
           reset();
@@ -184,43 +198,23 @@ export function Projects() {
       }
     };
 
-    /*
-     * =====================================================
-     * ACTIVATE PROJECT
-     * =====================================================
-     */
-
     const activate = (id: string) => {
       if (!id) return;
 
-      /*
-       * Already active.
-       */
       if (activeRef.current === id) {
         return;
       }
 
-      /*
-       * IMPORTANT:
-       *
-       * If Flip is currently moving the cards,
-       * DON'T start another Flip.
-       */
       if (isAnimatingRef.current) {
         return;
       }
 
-      /*
-       * Capture the CURRENT geometry.
-       */
       const state = Flip.getState(cards);
 
-      /*
-       * Change the actual CSS grid layout.
-       */
       clearLayoutClasses();
 
-      const layoutClass = getLayoutClass(id);
+      const layoutClass =
+        getLayoutClass(id);
 
       if (layoutClass) {
         grid.classList.add(layoutClass);
@@ -231,10 +225,6 @@ export function Projects() {
 
       setActiveProject(id);
 
-      /*
-       * Animate from the previous geometry
-       * to the new geometry.
-       */
       flipRef.current = Flip.from(state, {
         targets: cards,
 
@@ -256,48 +246,22 @@ export function Projects() {
 
           isAnimatingRef.current = false;
 
-          /*
-           * IMPORTANT:
-           *
-           * The cards may have moved underneath
-           * the cursor.
-           *
-           * We DON'T trust mouseenter/mouseleave.
-           *
-           * Instead, now that the layout is stable,
-           * check the actual pointer location.
-           */
           resolvePointerState();
         },
       });
     };
-
-    /*
-     * =====================================================
-     * RESET TO DEFAULT BENTO
-     * =====================================================
-     */
 
     const reset = () => {
       if (!activeRef.current) {
         return;
       }
 
-      /*
-       * Never interrupt an active Flip.
-       */
       if (isAnimatingRef.current) {
         return;
       }
 
-      /*
-       * Capture expanded geometry.
-       */
       const state = Flip.getState(cards);
 
-      /*
-       * Return to original layout.
-       */
       clearLayoutClasses();
 
       activeRef.current = null;
@@ -305,9 +269,6 @@ export function Projects() {
 
       setActiveProject(null);
 
-      /*
-       * Animate back to default bento.
-       */
       flipRef.current = Flip.from(state, {
         targets: cards,
 
@@ -329,36 +290,20 @@ export function Projects() {
 
           isAnimatingRef.current = false;
 
-          /*
-           * The cursor might have entered a card
-           * while the reset animation was running.
-           *
-           * Resolve again from the final layout.
-           */
           resolvePointerState();
         },
       });
     };
 
-    /*
-     * =====================================================
-     * POINTER MOVE
-     * =====================================================
-     *
-     * We listen on the GRID rather than individual cards.
-     */
+    const handlePointerMove = (
+      event: PointerEvent
+    ) => {
+      pointerRef.current.x =
+        event.clientX;
 
-    const handlePointerMove = (event: PointerEvent) => {
-      pointerRef.current.x = event.clientX;
-      pointerRef.current.y = event.clientY;
+      pointerRef.current.y =
+        event.clientY;
 
-      /*
-       * While the layout is moving:
-       *
-       * DO NOT inspect the card under the pointer.
-       *
-       * Just remember the pointer position.
-       */
       if (isAnimatingRef.current) {
         return;
       }
@@ -369,31 +314,30 @@ export function Projects() {
         return;
       }
 
-      const card = target.closest<HTMLElement>(
-        "[data-project-card]"
-      );
+      const card =
+        target.closest<HTMLElement>(
+          "[data-project-card]"
+        );
 
-      const id = card?.dataset.projectCard;
+      const id =
+        card?.dataset.projectCard;
 
       if (id) {
         activate(id);
       }
     };
 
-    /*
-     * =====================================================
-     * POINTER ENTER GRID
-     * =====================================================
-     */
+    const handlePointerEnter = (
+      event: PointerEvent
+    ) => {
+      pointerRef.current.x =
+        event.clientX;
 
-    const handlePointerEnter = (event: PointerEvent) => {
-      pointerRef.current.x = event.clientX;
-      pointerRef.current.y = event.clientY;
+      pointerRef.current.y =
+        event.clientY;
+
       pointerRef.current.insideGrid = true;
 
-      /*
-       * Don't interrupt an existing animation.
-       */
       if (isAnimatingRef.current) {
         return;
       }
@@ -404,46 +348,36 @@ export function Projects() {
         return;
       }
 
-      const card = target.closest<HTMLElement>(
-        "[data-project-card]"
-      );
+      const card =
+        target.closest<HTMLElement>(
+          "[data-project-card]"
+        );
 
-      const id = card?.dataset.projectCard;
+      const id =
+        card?.dataset.projectCard;
 
       if (id) {
         activate(id);
       }
     };
 
-    /*
-     * =====================================================
-     * POINTER LEAVE GRID
-     * =====================================================
-     */
+    const handlePointerLeave = (
+      event: PointerEvent
+    ) => {
+      pointerRef.current.x =
+        event.clientX;
 
-    const handlePointerLeave = (event: PointerEvent) => {
-      pointerRef.current.x = event.clientX;
-      pointerRef.current.y = event.clientY;
+      pointerRef.current.y =
+        event.clientY;
+
       pointerRef.current.insideGrid = false;
 
-      /*
-       * If we're currently animating,
-       * DON'T interrupt it.
-       *
-       * The animation will finish normally.
-       */
       if (isAnimatingRef.current) {
         return;
       }
 
       reset();
     };
-
-    /*
-     * =====================================================
-     * EVENTS
-     * =====================================================
-     */
 
     grid.addEventListener(
       "pointermove",
@@ -459,12 +393,6 @@ export function Projects() {
       "pointerleave",
       handlePointerLeave
     );
-
-    /*
-     * =====================================================
-     * CLEANUP
-     * =====================================================
-     */
 
     return () => {
       grid.removeEventListener(
@@ -492,109 +420,639 @@ export function Projects() {
     };
   }, []);
 
+  /*
+   * =====================================================
+   * INTERRUPTIBLE PROJECT DETAIL TIMELINE
+   * =====================================================
+   */
+
+  useLayoutEffect(() => {
+    const drawer =
+      document.querySelector<HTMLElement>(
+        "[data-project-drawer]"
+      );
+
+    const backdrop =
+      document.querySelector<HTMLElement>(
+        "[data-project-backdrop]"
+      );
+
+    const panels = gsap.utils.toArray<HTMLElement>(
+      "[data-project-panel]"
+    );
+
+    const closeButton =
+      document.querySelector<HTMLElement>(
+        "[data-project-close]"
+      );
+
+    if (
+      !drawer ||
+      !backdrop ||
+      !panels.length ||
+      !closeButton
+    ) {
+      return;
+    }
+
+    /*
+     * Initial state
+     */
+    gsap.set(drawer, {
+      autoAlpha: 0,
+      pointerEvents: "none",
+    });
+
+    gsap.set(backdrop, {
+      opacity: 0,
+    });
+
+    gsap.set(panels, {
+      x: "110%",
+      y: 0,
+      rotation: 0,
+    });
+
+    gsap.set(closeButton, {
+      opacity: 0,
+      rotation: -45,
+      scale: 0.7,
+    });
+
+    /*
+     * =================================================
+     * SINGLE TIMELINE
+     * =================================================
+     */
+
+    const tl = gsap.timeline({
+      paused: true,
+
+      onReverseComplete: () => {
+        detailOpenRef.current = false;
+
+        gsap.set(drawer, {
+          pointerEvents: "none",
+        });
+
+        setSelectedProject(null);
+        selectedProjectRef.current = null;
+      },
+    });
+
+    /*
+     * =================================================
+     * ENTER
+     * =================================================
+     */
+
+    tl.set(drawer, {
+      autoAlpha: 1,
+      pointerEvents: "auto",
+    })
+
+      .to(
+        backdrop,
+        {
+          opacity: 1,
+          duration: 0.4,
+          ease: "power2.out",
+          easeReverse: "power4.out",
+        },
+        0
+      )
+
+      /*
+       * Three panels enter from the RIGHT.
+       */
+      .to(
+        panels,
+        {
+          x: "0%",
+          y: 0,
+          rotation: 0,
+          duration: 0.7,
+
+          ease: "back.out(1.15)",
+
+          easeReverse: "power3.in",
+
+          stagger: {
+            amount: 0.12,
+            from: "start",
+          },
+        },
+        0
+      )
+
+      /*
+       * Close button.
+       */
+      .to(
+        closeButton,
+        {
+          opacity: 1,
+          rotation: 0,
+          scale: 1,
+
+          duration: 0.45,
+
+          ease: "back.out(1.7)",
+
+          easeReverse: "power3.in",
+        },
+        0.25
+      )
+
+      /*
+       * ===============================================
+       * PAUSE
+       * ===============================================
+       */
+
+      .addPause();
+
+    /*
+     * Save the exact point where the ENTER
+     * animation finishes.
+     */
+    detailEnterEndRef.current =
+      tl.duration();
+
+    /*
+     * =================================================
+     * EXIT
+     * =================================================
+     */
+
+    tl
+      /*
+       * Close button disappears first.
+       */
+      .to(
+        closeButton,
+        {
+          opacity: 0,
+          rotation: 45,
+          scale: 0.7,
+
+          duration: 0.2,
+
+          ease: "power3.in",
+        }
+      )
+
+      /*
+       * Panels fall down with random rotation.
+       *
+       * Bottom panel exits first.
+       */
+      .to(
+        panels,
+        {
+          y: "110vh",
+
+          rotation: "random(-8, 8)",
+
+          duration: 1,
+
+          ease: "power3.in",
+
+          stagger: {
+            from: "end",
+            each: 0.06,
+          },
+        },
+        "<"
+      )
+
+      /*
+       * Backdrop fades with the panels.
+       */
+      .to(
+        backdrop,
+        {
+          opacity: 0,
+
+          duration: 0.35,
+
+          ease: "power2.in",
+        },
+        "<0.1"
+      )
+
+      /*
+       * Reset panels so the next opening
+       * starts from the right again.
+       */
+      .set(panels, {
+        x: "110%",
+        y: 0,
+        rotation: 0,
+      })
+
+      .set(drawer, {
+        autoAlpha: 0,
+        pointerEvents: "none",
+      });
+
+    detailTimelineRef.current = tl;
+
+    return () => {
+      tl.kill();
+
+      detailTimelineRef.current = null;
+    };
+  }, []);
+
+  /*
+   * =====================================================
+   * OPEN PROJECT
+   * =====================================================
+   */
+
+  const openProject = (
+    project: Project
+  ) => {
+    const tl =
+      detailTimelineRef.current;
+
+    if (!tl) return;
+
+    selectedProjectRef.current =
+      project;
+
+    setSelectedProject(project);
+
+    detailOpenRef.current = true;
+
+    /*
+     * If the timeline has already reached
+     * the exit section, restart the enter.
+     */
+    if (
+      tl.time() >=
+      detailEnterEndRef.current
+    ) {
+      tl.timeScale(1).restart();
+    } else {
+      /*
+       * If the timeline was partially reversed,
+       * play forward from its current position.
+       */
+      tl.timeScale(1).play();
+    }
+  };
+
+  /*
+   * =====================================================
+   * CLOSE PROJECT
+   * =====================================================
+   */
+
+  const closeProject = () => {
+    const tl =
+      detailTimelineRef.current;
+
+    if (!tl) return;
+
+    detailOpenRef.current = false;
+
+    /*
+     * IMPORTANT:
+     *
+     * If we're still inside the ENTER animation,
+     * reverse it from exactly where it currently is.
+     *
+     * This is the key behavior from the GSAP demo.
+     */
+    if (
+      tl.time() <
+      detailEnterEndRef.current
+    ) {
+      tl.timeScale(1.5).reverse();
+
+      return;
+    }
+
+    /*
+     * If fully open, continue forward
+     * into the completely different EXIT animation.
+     */
+    tl.timeScale(1).play();
+  };
+
+  /*
+   * =====================================================
+   * KEYBOARD ESC
+   * =====================================================
+   */
+
+  useLayoutEffect(() => {
+    const handleKeyDown = (
+      event: KeyboardEvent
+    ) => {
+      if (
+        event.key === "Escape" &&
+        detailOpenRef.current
+      ) {
+        closeProject();
+      }
+    };
+
+    window.addEventListener(
+      "keydown",
+      handleKeyDown
+    );
+
+    return () => {
+      window.removeEventListener(
+        "keydown",
+        handleKeyDown
+      );
+    };
+  });
+
   return (
-    <section
-      id="projects"
-      className={styles.projects}
-    >
-      {/* =================================================
-          HEADER
-      ================================================= */}
+    <>
+      <section
+        id="projects"
+        className={styles.projects}
+      >
+        <div className={styles.header}>
+          <div className={styles.headerCopy}>
+            <span className={styles.eyebrow}>
+              ... /Projects ...
+            </span>
 
-      <div className={styles.header}>
-        <div className={styles.headerCopy}>
-          <span className={styles.eyebrow}>
-            ... /Projects ...
-          </span>
+            <p className={styles.description}>
+              A selection of things I&apos;ve
+              built across development, design,
+              AI, and creative technology.
+            </p>
+          </div>
 
-          <p className={styles.description}>
-            A selection of things I&apos;ve built across
-            development, design, AI, and creative
-            technology.
-          </p>
+          <h2 className={styles.title}>
+            Projects
+          </h2>
         </div>
 
-        <h2 className={styles.title}>
-          Projects
-        </h2>
-      </div>
+        <div
+          ref={gridRef}
+          className={styles.projectGrid}
+        >
+          {projects.map(
+            (project, index) => (
+              <article
+                key={project.id}
+                data-project-card={
+                  project.id
+                }
+                className={`
+                  ${styles.projectCard}
+                  ${styles[`project${index + 1}`]}
+                  ${
+                    activeProject ===
+                    project.id
+                      ? styles.active
+                      : ""
+                  }
+                `}
+                tabIndex={0}
+                onClick={() =>
+                  openProject(project)
+                }
+                onKeyDown={(event) => {
+                  if (
+                    event.key ===
+                      "Enter" ||
+                    event.key === " "
+                  ) {
+                    event.preventDefault();
 
-      {/* =================================================
-          PROJECT BENTO
-      ================================================= */}
+                    openProject(project);
+                  }
+                }}
+              >
+                <div
+                  className={
+                    styles.imageWrapper
+                  }
+                >
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className={
+                      styles.projectImage
+                    }
+                  />
+
+                  <div
+                    className={
+                      styles.imageOverlay
+                    }
+                  />
+
+                  <div
+                    className={
+                      styles.projectInfo
+                    }
+                  >
+                    <div>
+                      <span
+                        className={
+                          styles.projectNumber
+                        }
+                      >
+                        0{index + 1}
+                      </span>
+
+                      <h3>
+                        {project.title}
+                      </h3>
+
+                      <p>
+                        {project.description}
+                      </p>
+                    </div>
+
+                    <span
+                      className={
+                        styles.projectArrow
+                      }
+                    >
+                      ↗
+                    </span>
+                  </div>
+                </div>
+              </article>
+            )
+          )}
+        </div>
+
+        <div
+          className={styles.githubWrapper}
+        >
+          <a
+            href="https://github.com/debuggerhimanshu"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={
+              styles.githubButton
+            }
+          >
+            <span>
+              View GitHub
+            </span>
+
+            <span>↗</span>
+          </a>
+        </div>
+      </section>
+
+      {/*
+       * =================================================
+       * PROJECT DETAIL DRAWER
+       * =================================================
+       */}
 
       <div
-        ref={gridRef}
-        className={styles.projectGrid}
+        data-project-drawer
+        className={
+          styles.projectDrawer
+        }
+        aria-hidden={
+          selectedProject === null
+        }
       >
-        {projects.map((project, index) => (
-          <article
-            key={project.id}
-            data-project-card={project.id}
-            className={`
-              ${styles.projectCard}
-              ${styles[`project${index + 1}`]}
-              ${
-                activeProject === project.id
-                  ? styles.active
-                  : ""
-              }
-            `}
-            tabIndex={0}
-          >
-            <div className={styles.imageWrapper}>
-              <img
-                src={project.image}
-                alt={project.title}
-                className={styles.projectImage}
-              />
+        <div
+          data-project-backdrop
+          className={
+            styles.projectBackdrop
+          }
+          onClick={closeProject}
+        />
 
-              <div className={styles.imageOverlay} />
-
-              <div className={styles.projectInfo}>
-                <div>
-                  <span className={styles.projectNumber}>
-                    0{index + 1}
-                  </span>
-
-                  <h3>
-                    {project.title}
-                  </h3>
-
-                  <p>
-                    {project.description}
-                  </p>
-                </div>
-
-                <span className={styles.projectArrow}>
-                  ↗
-                </span>
-              </div>
-            </div>
-          </article>
-        ))}
-      </div>
-
-      {/* =================================================
-          GITHUB
-      ================================================= */}
-
-      <div className={styles.githubWrapper}>
-        <a
-          href="https://github.com/debuggerhimanshu"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={styles.githubButton}
+        <div
+          className={
+            styles.projectDrawerInner
+          }
         >
-          <span>
-            View GitHub
-          </span>
+          <button
+            type="button"
+            data-project-close
+            className={styles.projectClose}
+            onClick={closeProject}
+            aria-label="Close project"
+            >
+            <span className={styles.closeLine} />
+            <span className={styles.closeLine} />
+          </button>
 
-          <span>
-            ↗
-          </span>
-        </a>
+          {/*
+           * TOP — IMAGE
+           */}
+
+          <div
+            data-project-panel
+            className={`
+              ${styles.projectPanel}
+              ${styles.projectImagePanel}
+            `}
+          >
+            {selectedProject && (
+              <img
+                src={selectedProject.image}
+                alt={
+                  selectedProject.title
+                }
+              />
+            )}
+          </div>
+
+          {/*
+           * MIDDLE — DESCRIPTION
+           */}
+
+          <div
+            data-project-panel
+            className={`
+              ${styles.projectPanel}
+              ${styles.projectDetailsPanel}
+            `}
+          >
+            {selectedProject && (
+              <>
+                <span
+                  className={
+                    styles.detailEyebrow
+                  }
+                >
+                  ... /Project details ...
+                </span>
+
+                <h3>
+                  {selectedProject.title}
+                </h3>
+
+                <p
+                  className={
+                    styles.detailShort
+                  }
+                >
+                  {
+                    selectedProject.description
+                  }
+                </p>
+
+                <p
+                  className={
+                    styles.detailDescription
+                  }
+                >
+                  {
+                    selectedProject.details
+                  }
+                </p>
+              </>
+            )}
+          </div>
+
+          {/*
+           * BOTTOM — GITHUB
+           */}
+
+          <div
+            data-project-panel
+            className={`
+              ${styles.projectPanel}
+              ${styles.projectActionPanel}
+            `}
+          >
+            {selectedProject && (
+              <a
+                href={selectedProject.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.projectGithubButton}
+                >
+                <span className={styles.githubButtonMain}>
+                    <SiGithub
+                    className={styles.githubIcon}
+                    aria-hidden="true"
+                    />
+
+                    <span>View GitHub Repository</span>
+                </span>
+
+                <span className={styles.githubArrow}>
+                    ↗
+                </span>
+                </a>
+            )}
+          </div>
+        </div>
       </div>
-    </section>
+    </>
   );
 }
