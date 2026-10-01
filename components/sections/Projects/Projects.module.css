@@ -1,29 +1,97 @@
 .projects {
+
   position: relative;
 
   width: 100vw;
 
   margin-left: calc(50% - 50vw);
 
-  padding: 90px 7vw 120px;
+  padding: 55px 7vw 55px;
 
   background: #ffffff;
 
   color: #0d0d0d;
 
-  overflow: hidden;
+  overflow: visible;
+
 }
 
 .projects ::selection {
+
   background: #000000;
+
   color: #ffffff;
+
 }
 
 /* =========================================================
-   HEADER
+
+   PROJECTS CUSTOM CURSOR
+
 ========================================================= */
 
+/* =========================================================
+   PROJECTS CUSTOM CURSOR
+========================================================= */
+
+.flair {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+
+  width: 140px;
+  height: 140px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+  pointer-events: none;
+  user-select: none;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translate3d(-50%, -50%, 0) scale(0.7);
+  transform-origin: center;
+  will-change: transform, opacity;
+}
+
+/* Use the SVG supplied by the Projects component as the cursor artwork. */
+.flair::before,
+.flair::after {
+  content: none;
+}
+
+.flair img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Keep the browser cursor everywhere except the project cards. */
+.projectCard,
+.projectCard * {
+  cursor: none;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .flair {
+    display: none;
+  }
+
+  .projectCard,
+  .projectCard * {
+    cursor: auto;
+  }
+}
+
 .header {
+
   width: min(1380px, 100%);
 
   margin: 0 auto 60px;
@@ -33,17 +101,21 @@
   grid-template-columns: 1fr auto;
 
   align-items: end;
+
 }
 
 .headerCopy {
+
   display: flex;
 
   flex-direction: column;
 
   gap: 14px;
+
 }
 
 .eyebrow {
+
   color: #555555;
 
   font-family: monospace;
@@ -51,9 +123,11 @@
   font-size: 12px;
 
   letter-spacing: -0.02em;
+
 }
 
 .description {
+
   max-width: 520px;
 
   margin: 0;
@@ -67,15 +141,21 @@
   line-height: 1.25;
 
   letter-spacing: -0.035em;
+
 }
 
 .title {
+
   margin: 0;
 
   font-family:
+
     "Harabara",
+
     Arial,
+
     Helvetica,
+
     sans-serif;
 
   font-size: clamp(48px, 4.8vw, 68px);
@@ -85,13 +165,17 @@
   line-height: 0.95;
 
   text-align: right;
+
 }
 
 /* =========================================================
+
    BENTO GRID
+
 ========================================================= */
 
 .projectGrid {
+
   width: min(1380px, 100%);
 
   height: clamp(500px, 60vh, 560px);
@@ -101,210 +185,301 @@
   display: grid;
 
   grid-template-columns:
+
     minmax(0, 1.35fr)
+
     minmax(0, 0.9fr)
+
     minmax(0, 0.75fr);
 
   grid-template-rows:
+
     minmax(0, 1fr)
+
     minmax(0, 1fr);
 
   gap: 12px;
+
 }
 
 /* =========================================================
+
    DEFAULT CARD POSITIONS
+
 ========================================================= */
 
 .project1 {
+
   grid-column: 1;
 
   grid-row: 1 / 3;
+
 }
 
 .project2 {
+
   grid-column: 2;
 
   grid-row: 1 / 3;
+
 }
 
 .project3 {
+
   grid-column: 3;
 
   grid-row: 1;
+
 }
 
 .project4 {
+
   grid-column: 3;
 
   grid-row: 2;
+
 }
 
 /* =========================================================
+
    ACTIVE — CAMPUSFLOW
+
    P1 becomes dominant
+
 ========================================================= */
 
 .activeCampusflow {
+
   grid-template-columns:
+
     minmax(0, 1.85fr)
+
     minmax(0, 0.65fr)
+
     minmax(0, 0.5fr);
 
   grid-template-rows:
+
     minmax(0, 1fr)
+
     minmax(0, 1fr);
+
 }
 
 .activeCampusflow .project1 {
+
   grid-column: 1;
 
   grid-row: 1 / 3;
+
 }
 
 .activeCampusflow .project2 {
+
   grid-column: 2;
 
   grid-row: 1 / 3;
+
 }
 
 .activeCampusflow .project3 {
+
   grid-column: 3;
 
   grid-row: 1;
+
 }
 
 .activeCampusflow .project4 {
+
   grid-column: 3;
 
   grid-row: 2;
+
 }
 
 /* =========================================================
+
    ACTIVE — DEEPTRUST
+
    P2 becomes dominant
+
 ========================================================= */
 
 .activeDeeptrust {
+
   grid-template-columns:
+
     minmax(0, 0.5fr)
+
     minmax(0, 1.85fr)
+
     minmax(0, 0.65fr);
 
   grid-template-rows:
+
     minmax(0, 1fr)
+
     minmax(0, 1fr);
+
 }
 
 .activeDeeptrust .project1 {
+
   grid-column: 1;
 
   grid-row: 1 / 3;
+
 }
 
 .activeDeeptrust .project2 {
+
   grid-column: 2;
 
   grid-row: 1 / 3;
+
 }
 
 .activeDeeptrust .project3 {
+
   grid-column: 3;
 
   grid-row: 1;
+
 }
 
 .activeDeeptrust .project4 {
+
   grid-column: 3;
 
   grid-row: 2;
+
 }
 
 /* =========================================================
+
    ACTIVE — CIPHERNOTE
+
    P3 becomes dominant
+
 ========================================================= */
 
 .activeCiphernote {
+
   grid-template-columns:
+
     minmax(0, 0.65fr)
+
     minmax(0, 0.5fr)
+
     minmax(0, 1.85fr);
 
   grid-template-rows:
+
     minmax(0, 1fr)
+
     minmax(0, 1fr);
+
 }
 
 .activeCiphernote .project1 {
+
   grid-column: 1;
 
   grid-row: 1;
+
 }
 
 .activeCiphernote .project2 {
+
   grid-column: 2;
 
   grid-row: 1 / 3;
+
 }
 
 .activeCiphernote .project3 {
+
   grid-column: 3;
 
   grid-row: 1 / 3;
+
 }
 
 .activeCiphernote .project4 {
+
   grid-column: 1;
 
   grid-row: 2;
+
 }
 
 /* =========================================================
+
    ACTIVE — PORTFOLIO
+
    P4 becomes dominant
+
 ========================================================= */
 
 .activePortfolio {
+
   grid-template-columns:
+
     minmax(0, 0.65fr)
+
     minmax(0, 0.5fr)
+
     minmax(0, 1.85fr);
 
   grid-template-rows:
+
     minmax(0, 1fr)
+
     minmax(0, 1fr);
+
 }
 
 .activePortfolio .project1 {
+
   grid-column: 1;
 
   grid-row: 1 / 3;
+
 }
 
 .activePortfolio .project2 {
+
   grid-column: 2;
 
   grid-row: 1;
+
 }
 
 .activePortfolio .project3 {
+
   grid-column: 2;
 
   grid-row: 2;
+
 }
 
 .activePortfolio .project4 {
+
   grid-column: 3;
 
   grid-row: 1 / 3;
+
 }
 
 /* =========================================================
+
    CARD
+
 ========================================================= */
 
 .projectCard {
+
   position: relative;
 
   min-width: 0;
@@ -322,18 +497,25 @@
   outline: none;
 
   /*
+
    * Flip handles the geometry.
+
    * Do not add scale transforms here.
+
    */
 
   will-change: transform;
+
 }
 
 /* =========================================================
+
    IMAGE
+
 ========================================================= */
 
 .imageWrapper {
+
   position: relative;
 
   width: 100%;
@@ -341,9 +523,11 @@
   height: 100%;
 
   overflow: hidden;
+
 }
 
 .projectImage {
+
   width: 100%;
 
   height: 100%;
@@ -353,44 +537,63 @@
   object-fit: cover;
 
   /*
+
    * Keep the image stable while Flip
+
    * changes the card geometry.
+
    */
 
   transform: scale(1);
+
 }
 
 /* =========================================================
+
    OVERLAY
+
 ========================================================= */
 
 .imageOverlay {
+
   position: absolute;
 
   inset: 0;
 
   background:
+
     linear-gradient(
+
       to bottom,
+
       rgba(0, 0, 0, 0.03) 30%,
+
       rgba(0, 0, 0, 0.78) 100%
+
     );
 
   opacity: 0.7;
 
   transition: opacity 500ms ease;
+
 }
 
 .projectCard:hover .imageOverlay,
+
 .projectCard.active .imageOverlay {
+
   opacity: 0.9;
+
 }
 
 /* =========================================================
+
    PROJECT INFORMATION
+
 ========================================================= */
 
 .projectInfo {
+
   position: absolute;
 
   inset: auto 24px 22px 24px;
@@ -408,18 +611,25 @@
   opacity: 0;
 
   transition:
+
     transform 500ms cubic-bezier(0.16, 1, 0.3, 1),
+
     opacity 400ms ease;
+
 }
 
 .projectCard:hover .projectInfo,
+
 .projectCard.active .projectInfo {
+
   transform: translateY(0);
 
   opacity: 1;
+
 }
 
 .projectNumber {
+
   display: block;
 
   margin-bottom: 7px;
@@ -429,9 +639,11 @@
   font-size: 11px;
 
   opacity: 0.65;
+
 }
 
 .projectInfo h3 {
+
   margin: 0;
 
   font-size: clamp(22px, 2vw, 30px);
@@ -439,21 +651,27 @@
   font-weight: 500;
 
   letter-spacing: -0.045em;
+
 }
 
 .projectInfo p {
+
   margin: 5px 0 0;
 
   font-size: 13px;
 
   opacity: 0.68;
+
 }
 
 /* =========================================================
+
    PROJECT ARROW
+
 ========================================================= */
 
 .projectArrow {
+
   width: 42px;
 
   height: 42px;
@@ -471,31 +689,43 @@
   font-size: 19px;
 
   transition:
+
     transform 400ms cubic-bezier(0.16, 1, 0.3, 1),
-    background 300ms ease;
+
+background 300ms ease;
+
 }
 
 .projectCard:hover .projectArrow {
+
   transform: rotate(45deg);
 
   background: rgba(255, 255, 255, 0.12);
+
 }
 
 /* =========================================================
+
    FOCUS
+
 ========================================================= */
 
 .projectCard:focus-visible {
+
   outline: 2px solid #000000;
 
   outline-offset: 4px;
+
 }
 
 /* =========================================================
+
    GITHUB — OUTER MAGNETIC BUTTON
+
 ========================================================= */
 
 .githubWrapper {
+
   position: relative;
 
   display: flex;
@@ -509,8 +739,11 @@
   margin: 52px auto 0;
 
   /*
+
    * Larger invisible magnetic zone around
+
    * the actual button.
+
    */
 
   padding: 35px 60px;
@@ -518,9 +751,11 @@
   overflow: visible;
 
   cursor: pointer;
+
 }
 
 .githubButton {
+
   display: inline-flex;
 
   align-items: center;
@@ -538,40 +773,57 @@
   font-size: 14px;
 
   /*
+
    * GSAP controls the transform.
+
    */
 
   will-change: transform;
 
   transition:
-    background 300ms ease,
+
+background 300ms ease,
+
     color 300ms ease;
+
 }
 
 .githubButton span:first-child {
+
   /*
+
    * GSAP independently moves the
+
    * label with lower magnetic strength.
+
    */
 
   will-change: transform;
+
 }
 
 .githubButton span:last-child {
+
   font-size: 17px;
+
 }
 
 .githubButton:hover {
+
   background: #0d0d0d;
 
   color: #ffffff;
+
 }
 
 /* =========================================================
+
    PROJECT DETAIL DRAWER
+
 ========================================================= */
 
 .projectDrawer {
+
   position: fixed;
 
   inset: 0;
@@ -581,9 +833,11 @@
   pointer-events: none;
 
   visibility: hidden;
+
 }
 
 .projectBackdrop {
+
   position: absolute;
 
   inset: 0;
@@ -591,9 +845,11 @@
   background: rgba(0, 0, 0, 0.48);
 
   opacity: 0;
+
 }
 
 .projectDrawerInner {
+
   position: absolute;
 
   top: 0;
@@ -617,13 +873,17 @@
   gap: 8px;
 
   overflow: hidden;
+
 }
 
 /* =========================================================
+
    CLOSE BUTTON
+
 ========================================================= */
 
 .projectClose {
+
   position: absolute;
 
   top: 24px;
@@ -653,13 +913,17 @@
   opacity: 0;
 
   will-change: transform, opacity;
+
 }
 
 /* =========================================================
+
    MINIMAL CLOSE MARK
+
 ========================================================= */
 
 .closeLine {
+
   position: absolute;
 
   width: 25px;
@@ -673,53 +937,83 @@
   transform-origin: center;
 
   transition:
+
     transform 450ms cubic-bezier(0.16, 1, 0.3, 1),
+
     width 350ms ease,
-    background 250ms ease;
+
+background 250ms ease;
 
   box-shadow:
+
     0 0 8px rgba(0, 0, 0, 0.35);
+
 }
 
 /*
+
  * Normal state:
+
  *
+
  * ─────────
+
  *
+
  * ─────────
+
  */
 
 .closeLine:first-child {
+
   transform: translateY(-4px);
+
 }
 
 .closeLine:last-child {
+
   transform: translateY(4px);
+
 }
 
 /*
+
  * Hover:
+
  *
+
  * \       /
+
  *   \   /
+
  *    X
+
  *   /   \
+
  * /       \
+
  */
 
 .projectClose:hover .closeLine:first-child {
+
   transform: rotate(45deg);
+
 }
 
 .projectClose:hover .closeLine:last-child {
+
   transform: rotate(-45deg);
+
 }
 
 /* =========================================================
+
    SHARED PANELS
+
 ========================================================= */
 
 .projectPanel {
+
   position: relative;
 
   width: 100%;
@@ -733,20 +1027,27 @@
   will-change: transform;
 
   box-shadow:
+
     0 18px 50px rgba(0, 0, 0, 0.14);
+
 }
 
 /* =========================================================
+
    IMAGE PANEL
+
 ========================================================= */
 
 .projectImagePanel {
+
   height: min(46vh, 440px);
 
   background: #161616;
+
 }
 
 .projectImagePanel img {
+
   width: 100%;
 
   height: 100%;
@@ -754,13 +1055,17 @@
   display: block;
 
   object-fit: cover;
+
 }
 
 /* =========================================================
+
    DETAILS PANEL
+
 ========================================================= */
 
 .projectDetailsPanel {
+
   min-height: 220px;
 
   padding: 32px;
@@ -774,9 +1079,11 @@
   background: #ffffff;
 
   color: #0d0d0d;
+
 }
 
 .detailEyebrow {
+
   margin-bottom: 18px;
 
   color: #777777;
@@ -786,15 +1093,21 @@
   font-size: 11px;
 
   letter-spacing: -0.02em;
+
 }
 
 .projectDetailsPanel h3 {
+
   margin: 0;
 
   font-family:
+
     "Harabara",
+
     Arial,
+
     Helvetica,
+
     sans-serif;
 
   font-size: clamp(42px, 5vw, 68px);
@@ -804,9 +1117,11 @@
   line-height: 0.9;
 
   letter-spacing: -0.04em;
+
 }
 
 .detailShort {
+
   margin: 18px 0 0;
 
   font-size: 16px;
@@ -814,9 +1129,11 @@
   font-weight: 500;
 
   letter-spacing: -0.02em;
+
 }
 
 .detailDescription {
+
   max-width: 580px;
 
   margin: 12px 0 0;
@@ -828,13 +1145,17 @@
   line-height: 1.5;
 
   letter-spacing: -0.015em;
+
 }
 
 /* =========================================================
+
    GITHUB PANEL
+
 ========================================================= */
 
 .projectActionPanel {
+
   min-height: 100px;
 
   display: flex;
@@ -846,9 +1167,11 @@
   padding: 20px;
 
   background: #0d0d0d;
+
 }
 
 .projectGithubButton {
+
   width: 100%;
 
   display: flex;
@@ -872,24 +1195,33 @@
   background: transparent;
 
   transition:
-    background 350ms ease,
+
+background 350ms ease,
+
     border-color 350ms ease,
+
     color 350ms ease;
+
 }
 
 /* =========================================================
+
    GITHUB LEFT SIDE
+
 ========================================================= */
 
 .githubButtonMain {
+
   display: flex;
 
   align-items: center;
 
   gap: 12px;
+
 }
 
 .githubIcon {
+
   width: 20px;
 
   height: 20px;
@@ -897,14 +1229,19 @@
   flex-shrink: 0;
 
   transition:
+
     transform 450ms cubic-bezier(0.16, 1, 0.3, 1);
+
 }
 
 /* =========================================================
+
    ARROW
+
 ========================================================= */
 
 .githubArrow {
+
   display: flex;
 
   align-items: center;
@@ -916,43 +1253,59 @@
   line-height: 1;
 
   transition:
+
     transform 450ms cubic-bezier(0.16, 1, 0.3, 1);
+
 }
 
 /* =========================================================
+
    HOVER
+
 ========================================================= */
 
 .projectGithubButton:hover {
+
   background: #ffffff;
 
   border-color: #ffffff;
 
   color: #0d0d0d;
+
 }
 
 .projectGithubButton:hover .githubIcon {
+
   transform: rotate(-8deg) scale(1.08);
+
 }
 
 .projectGithubButton:hover .githubArrow {
+
   transform: rotate(45deg);
+
 }
 
 /* =========================================================
+
    MOBILE
+
 ========================================================= */
 
 @media (max-width: 700px) {
+
   .projectDrawerInner {
+
     width: 100%;
 
     padding: 12px;
 
     gap: 7px;
+
   }
 
   .projectClose {
+
     top: 20px;
 
     right: 20px;
@@ -962,144 +1315,211 @@
     height: 42px;
 
     font-size: 26px;
+
   }
 
   .projectImagePanel {
+
     height: 38vh;
+
   }
 
   .projectDetailsPanel {
+
     min-height: 230px;
 
     padding: 24px;
+
   }
 
   .projectDetailsPanel h3 {
+
     font-size: 48px;
+
   }
 
   .projectActionPanel {
+
     min-height: 88px;
+
   }
+
 }
 
 /* =========================================================
+
    TABLET
+
 ========================================================= */
 
 @media (max-width: 900px) {
+
   .projects {
+
     padding: 70px 20px 90px;
+
   }
 
   .header {
+
     grid-template-columns: 1fr;
 
     gap: 35px;
+
   }
 
   .title {
+
     justify-self: start;
 
     text-align: left;
+
   }
 
   .projectGrid {
+
     height: auto;
 
     grid-template-columns:
+
       1fr
+
       1fr;
 
     grid-template-rows:
+
       repeat(3, 280px);
+
   }
 
   .project1 {
+
     grid-column: 1 / 3;
 
     grid-row: 1;
+
   }
 
   .project2 {
+
     grid-column: 1;
 
     grid-row: 2 / 4;
+
   }
 
   .project3 {
+
     grid-column: 2;
 
     grid-row: 2;
+
   }
 
   .project4 {
+
     grid-column: 2;
 
     grid-row: 3;
+
   }
 
   /* =======================================================
+
      TABLET ACTIVE LAYOUTS
 
      Keep the same safe 2-column structure.
+
   ======================================================= */
 
   .activeCampusflow,
+
   .activeDeeptrust,
+
   .activeCiphernote,
+
   .activePortfolio {
+
     grid-template-columns:
+
       1fr
+
       1fr;
 
     grid-template-rows:
+
       repeat(3, 280px);
+
   }
 
   .activeCampusflow .project1,
+
   .activeDeeptrust .project1,
+
   .activeCiphernote .project1,
+
   .activePortfolio .project1 {
+
     grid-column: 1 / 3;
 
     grid-row: 1;
+
   }
 
   .activeCampusflow .project2,
+
   .activeDeeptrust .project2,
+
   .activeCiphernote .project2,
+
   .activePortfolio .project2 {
+
     grid-column: 1;
 
     grid-row: 2 / 4;
+
   }
 
   .activeCampusflow .project3,
+
   .activeDeeptrust .project3,
+
   .activeCiphernote .project3,
+
   .activePortfolio .project3 {
+
     grid-column: 2;
 
     grid-row: 2;
+
   }
 
   .activeCampusflow .project4,
+
   .activeDeeptrust .project4,
+
   .activeCiphernote .project4,
+
   .activePortfolio .project4 {
+
     grid-column: 2;
 
     grid-row: 3;
+
   }
+
 }
 
 /* =========================================================
+
    SMALL MOBILE
+
 ========================================================= */
 
 @media (max-width: 600px) {
+
   .projectGrid {
+
     display: flex;
 
     flex-direction: column;
@@ -1107,41 +1527,61 @@
     height: auto;
 
     gap: 10px;
+
   }
 
   .projectCard {
+
     height: 330px;
+
   }
 
   /*
+
    * No desktop expansion layout on small screens.
+
    */
 
   .activeCampusflow,
+
   .activeDeeptrust,
+
   .activeCiphernote,
+
   .activePortfolio {
+
     display: flex;
 
     flex-direction: column;
 
     gap: 10px;
+
   }
 
   .projectInfo {
+
     opacity: 1;
 
     transform: none;
+
   }
 
   /*
+
    * Smaller magnetic area on phones.
+
    * The JS magnetic interaction is still
+
    * disabled naturally when there is no
+
    * mouse interaction.
+
    */
 
   .githubWrapper {
+
     padding: 25px 35px;
+
   }
+
 }
