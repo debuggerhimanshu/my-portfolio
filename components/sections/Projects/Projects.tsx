@@ -5,9 +5,12 @@ import {
   useRef,
   useState,
 } from "react";
+
 import gsap from "gsap";
 import { Flip } from "gsap/Flip";
+
 import { SiGithub } from "react-icons/si";
+
 import styles from "./Projects.module.css";
 
 gsap.registerPlugin(Flip);
@@ -103,6 +106,21 @@ export function Projects() {
   const detailEnterEndRef = useRef(0);
 
   const detailOpenRef = useRef(false);
+
+  /*
+   * =====================================================
+   * MAGNETIC GITHUB BUTTON
+   * =====================================================
+   */
+
+  const githubMagneticZoneRef =
+    useRef<HTMLDivElement>(null);
+
+  const githubButtonRef =
+    useRef<HTMLAnchorElement>(null);
+
+  const githubLabelRef =
+    useRef<HTMLSpanElement>(null);
 
   /*
    * =====================================================
@@ -422,6 +440,134 @@ export function Projects() {
 
   /*
    * =====================================================
+   * MAGNETIC GITHUB BUTTON
+   * =====================================================
+   */
+
+  useLayoutEffect(() => {
+    const zone =
+      githubMagneticZoneRef.current;
+
+    const button =
+      githubButtonRef.current;
+
+    const label =
+      githubLabelRef.current;
+
+    if (!zone || !button || !label) {
+      return;
+    }
+
+    const strength = 0.4;
+    const labelStrength = 0.24;
+
+    const handleMouseMove = (
+      event: MouseEvent
+    ) => {
+      const rect =
+        zone.getBoundingClientRect();
+
+      const mapX = gsap.utils.mapRange(
+        rect.left,
+        rect.right,
+        -rect.width / 2,
+        rect.width / 2,
+        event.clientX
+      );
+
+      const mapY = gsap.utils.mapRange(
+        rect.top,
+        rect.bottom,
+        -rect.height / 2,
+        rect.height / 2,
+        event.clientY
+      );
+
+      gsap.to(button, {
+        x: mapX * strength,
+        y: mapY * strength,
+
+        duration: 0.4,
+
+        ease: "power2.out",
+
+        overwrite: true,
+      });
+
+      gsap.to(label, {
+        x: mapX * labelStrength,
+        y: mapY * labelStrength,
+
+        duration: 0.4,
+
+        ease: "power2.out",
+
+        overwrite: true,
+      });
+    };
+
+    const handleMouseLeave = () => {
+      gsap.to(button, {
+        x: 0,
+        y: 0,
+
+        duration: 0.7,
+
+        ease: "elastic.out(1, 0.4)",
+
+        overwrite: true,
+      });
+
+      gsap.to(label, {
+        x: 0,
+        y: 0,
+
+        duration: 0.7,
+
+        ease: "elastic.out(1, 0.4)",
+
+        overwrite: true,
+      });
+    };
+
+    zone.addEventListener(
+      "mousemove",
+      handleMouseMove
+    );
+
+    zone.addEventListener(
+      "mouseleave",
+      handleMouseLeave
+    );
+
+    return () => {
+      zone.removeEventListener(
+        "mousemove",
+        handleMouseMove
+      );
+
+      zone.removeEventListener(
+        "mouseleave",
+        handleMouseLeave
+      );
+
+      gsap.killTweensOf(button);
+      gsap.killTweensOf(label);
+
+      gsap.set(button, {
+        x: 0,
+        y: 0,
+      });
+
+      gsap.set(label, {
+        x: 0,
+        y: 0,
+      });
+    };
+  }, []);
+
+  /*
+   * =====================================================
    * INTERRUPTIBLE PROJECT DETAIL TIMELINE
    * =====================================================
    */
@@ -458,6 +604,7 @@ export function Projects() {
     /*
      * Initial state
      */
+
     gsap.set(drawer, {
       autoAlpha: 0,
       pointerEvents: "none",
@@ -496,6 +643,7 @@ export function Projects() {
         });
 
         setSelectedProject(null);
+
         selectedProjectRef.current = null;
       },
     });
@@ -525,12 +673,14 @@ export function Projects() {
       /*
        * Three panels enter from the RIGHT.
        */
+
       .to(
         panels,
         {
           x: "0%",
           y: 0,
           rotation: 0,
+
           duration: 0.7,
 
           ease: "back.out(1.15)",
@@ -548,6 +698,7 @@ export function Projects() {
       /*
        * Close button.
        */
+
       .to(
         closeButton,
         {
@@ -576,6 +727,7 @@ export function Projects() {
      * Save the exact point where the ENTER
      * animation finishes.
      */
+
     detailEnterEndRef.current =
       tl.duration();
 
@@ -586,9 +738,11 @@ export function Projects() {
      */
 
     tl
+
       /*
        * Close button disappears first.
        */
+
       .to(
         closeButton,
         {
@@ -607,6 +761,7 @@ export function Projects() {
        *
        * Bottom panel exits first.
        */
+
       .to(
         panels,
         {
@@ -629,6 +784,7 @@ export function Projects() {
       /*
        * Backdrop fades with the panels.
        */
+
       .to(
         backdrop,
         {
@@ -645,6 +801,7 @@ export function Projects() {
        * Reset panels so the next opening
        * starts from the right again.
        */
+
       .set(panels, {
         x: "110%",
         y: 0,
@@ -690,6 +847,7 @@ export function Projects() {
      * If the timeline has already reached
      * the exit section, restart the enter.
      */
+
     if (
       tl.time() >=
       detailEnterEndRef.current
@@ -700,6 +858,7 @@ export function Projects() {
        * If the timeline was partially reversed,
        * play forward from its current position.
        */
+
       tl.timeScale(1).play();
     }
   };
@@ -723,9 +882,8 @@ export function Projects() {
      *
      * If we're still inside the ENTER animation,
      * reverse it from exactly where it currently is.
-     *
-     * This is the key behavior from the GSAP demo.
      */
+
     if (
       tl.time() <
       detailEnterEndRef.current
@@ -739,6 +897,7 @@ export function Projects() {
      * If fully open, continue forward
      * into the completely different EXIT animation.
      */
+
     tl.timeScale(1).play();
   };
 
@@ -890,10 +1049,18 @@ export function Projects() {
           )}
         </div>
 
+        {/* =================================================
+            OUTER MAGNETIC GITHUB BUTTON
+            ================================================= */}
+
         <div
-          className={styles.githubWrapper}
+          ref={githubMagneticZoneRef}
+          className={
+            styles.githubWrapper
+          }
         >
           <a
+            ref={githubButtonRef}
             href="https://github.com/debuggerhimanshu"
             target="_blank"
             rel="noopener noreferrer"
@@ -901,20 +1068,19 @@ export function Projects() {
               styles.githubButton
             }
           >
-            <span>
-              View GitHub
+            <span
+              ref={githubLabelRef}
+            >
+              See My GitHub
             </span>
 
-            <span>↗</span>
           </a>
         </div>
       </section>
 
-      {/*
-       * =================================================
-       * PROJECT DETAIL DRAWER
-       * =================================================
-       */}
+      {/* =================================================
+          PROJECT DETAIL DRAWER
+          ================================================= */}
 
       <div
         data-project-drawer
@@ -941,17 +1107,24 @@ export function Projects() {
           <button
             type="button"
             data-project-close
-            className={styles.projectClose}
+            className={
+              styles.projectClose
+            }
             onClick={closeProject}
             aria-label="Close project"
-            >
-            <span className={styles.closeLine} />
-            <span className={styles.closeLine} />
+          >
+            <span
+              className={styles.closeLine}
+            />
+
+            <span
+              className={styles.closeLine}
+            />
           </button>
 
-          {/*
-           * TOP — IMAGE
-           */}
+          {/* =================================================
+              TOP — IMAGE
+              ================================================= */}
 
           <div
             data-project-panel
@@ -962,7 +1135,9 @@ export function Projects() {
           >
             {selectedProject && (
               <img
-                src={selectedProject.image}
+                src={
+                  selectedProject.image
+                }
                 alt={
                   selectedProject.title
                 }
@@ -970,9 +1145,9 @@ export function Projects() {
             )}
           </div>
 
-          {/*
-           * MIDDLE — DESCRIPTION
-           */}
+          {/* =================================================
+              MIDDLE — DESCRIPTION
+              ================================================= */}
 
           <div
             data-project-panel
@@ -1018,9 +1193,9 @@ export function Projects() {
             )}
           </div>
 
-          {/*
-           * BOTTOM — GITHUB
-           */}
+          {/* =================================================
+              BOTTOM — GITHUB
+              ================================================= */}
 
           <div
             data-project-panel
@@ -1031,24 +1206,40 @@ export function Projects() {
           >
             {selectedProject && (
               <a
-                href={selectedProject.github}
+                href={
+                  selectedProject.github
+                }
                 target="_blank"
                 rel="noopener noreferrer"
-                className={styles.projectGithubButton}
+                className={
+                  styles.projectGithubButton
+                }
+              >
+                <span
+                  className={
+                    styles.githubButtonMain
+                  }
                 >
-                <span className={styles.githubButtonMain}>
-                    <SiGithub
-                    className={styles.githubIcon}
+                  <SiGithub
+                    className={
+                      styles.githubIcon
+                    }
                     aria-hidden="true"
-                    />
+                  />
 
-                    <span>View GitHub Repository</span>
+                  <span>
+                    View GitHub Repository
+                  </span>
                 </span>
 
-                <span className={styles.githubArrow}>
-                    ↗
+                <span
+                  className={
+                    styles.githubArrow
+                  }
+                >
+                  ↗
                 </span>
-                </a>
+              </a>
             )}
           </div>
         </div>

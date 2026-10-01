@@ -1,10 +1,16 @@
 .projects {
   position: relative;
+
   width: 100vw;
+
   margin-left: calc(50% - 50vw);
+
   padding: 90px 7vw 120px;
+
   background: #ffffff;
+
   color: #0d0d0d;
+
   overflow: hidden;
 }
 
@@ -13,54 +19,73 @@
   color: #ffffff;
 }
 
-
 /* =========================================================
    HEADER
 ========================================================= */
 
 .header {
   width: min(1380px, 100%);
+
   margin: 0 auto 60px;
 
   display: grid;
+
   grid-template-columns: 1fr auto;
+
   align-items: end;
 }
 
 .headerCopy {
   display: flex;
+
   flex-direction: column;
+
   gap: 14px;
 }
 
 .eyebrow {
   color: #555555;
+
   font-family: monospace;
+
   font-size: 12px;
+
   letter-spacing: -0.02em;
 }
 
 .description {
   max-width: 520px;
+
   margin: 0;
 
   color: #333333;
+
   font-family: Arial, Helvetica, sans-serif;
+
   font-size: clamp(17px, 1.4vw, 21px);
+
   line-height: 1.25;
+
   letter-spacing: -0.035em;
 }
 
 .title {
   margin: 0;
 
-  font-family: "Harabara", Arial, Helvetica, sans-serif;
+  font-family:
+    "Harabara",
+    Arial,
+    Helvetica,
+    sans-serif;
+
   font-size: clamp(48px, 4.8vw, 68px);
+
   font-weight: 400;
+
   line-height: 0.95;
+
   text-align: right;
 }
-
 
 /* =========================================================
    BENTO GRID
@@ -68,7 +93,9 @@
 
 .projectGrid {
   width: min(1380px, 100%);
+
   height: clamp(500px, 60vh, 560px);
+
   margin: 0 auto;
 
   display: grid;
@@ -85,31 +112,33 @@
   gap: 12px;
 }
 
-
 /* =========================================================
    DEFAULT CARD POSITIONS
 ========================================================= */
 
 .project1 {
   grid-column: 1;
+
   grid-row: 1 / 3;
 }
 
 .project2 {
   grid-column: 2;
+
   grid-row: 1 / 3;
 }
 
 .project3 {
   grid-column: 3;
+
   grid-row: 1;
 }
 
 .project4 {
   grid-column: 3;
+
   grid-row: 2;
 }
-
 
 /* =========================================================
    ACTIVE — CAMPUSFLOW
@@ -129,24 +158,27 @@
 
 .activeCampusflow .project1 {
   grid-column: 1;
+
   grid-row: 1 / 3;
 }
 
 .activeCampusflow .project2 {
   grid-column: 2;
+
   grid-row: 1 / 3;
 }
 
 .activeCampusflow .project3 {
   grid-column: 3;
+
   grid-row: 1;
 }
 
 .activeCampusflow .project4 {
   grid-column: 3;
+
   grid-row: 2;
 }
-
 
 /* =========================================================
    ACTIVE — DEEPTRUST
@@ -166,24 +198,27 @@
 
 .activeDeeptrust .project1 {
   grid-column: 1;
+
   grid-row: 1 / 3;
 }
 
 .activeDeeptrust .project2 {
   grid-column: 2;
+
   grid-row: 1 / 3;
 }
 
 .activeDeeptrust .project3 {
   grid-column: 3;
+
   grid-row: 1;
 }
 
 .activeDeeptrust .project4 {
   grid-column: 3;
+
   grid-row: 2;
 }
-
 
 /* =========================================================
    ACTIVE — CIPHERNOTE
@@ -203,24 +238,27 @@
 
 .activeCiphernote .project1 {
   grid-column: 1;
+
   grid-row: 1;
 }
 
 .activeCiphernote .project2 {
   grid-column: 2;
+
   grid-row: 1 / 3;
 }
 
 .activeCiphernote .project3 {
   grid-column: 3;
+
   grid-row: 1 / 3;
 }
 
 .activeCiphernote .project4 {
   grid-column: 1;
+
   grid-row: 2;
 }
-
 
 /* =========================================================
    ACTIVE — PORTFOLIO
@@ -240,24 +278,27 @@
 
 .activePortfolio .project1 {
   grid-column: 1;
+
   grid-row: 1 / 3;
 }
 
 .activePortfolio .project2 {
   grid-column: 2;
+
   grid-row: 1;
 }
 
 .activePortfolio .project3 {
   grid-column: 2;
+
   grid-row: 2;
 }
 
 .activePortfolio .project4 {
   grid-column: 3;
+
   grid-row: 1 / 3;
 }
-
 
 /* =========================================================
    CARD
@@ -267,6 +308,7 @@
   position: relative;
 
   min-width: 0;
+
   min-height: 0;
 
   overflow: hidden;
@@ -283,9 +325,9 @@
    * Flip handles the geometry.
    * Do not add scale transforms here.
    */
+
   will-change: transform;
 }
-
 
 /* =========================================================
    IMAGE
@@ -295,6 +337,7 @@
   position: relative;
 
   width: 100%;
+
   height: 100%;
 
   overflow: hidden;
@@ -302,6 +345,7 @@
 
 .projectImage {
   width: 100%;
+
   height: 100%;
 
   display: block;
@@ -312,9 +356,9 @@
    * Keep the image stable while Flip
    * changes the card geometry.
    */
+
   transform: scale(1);
 }
-
 
 /* =========================================================
    OVERLAY
@@ -322,6 +366,7 @@
 
 .imageOverlay {
   position: absolute;
+
   inset: 0;
 
   background:
@@ -341,17 +386,19 @@
   opacity: 0.9;
 }
 
-
 /* =========================================================
    PROJECT INFORMATION
 ========================================================= */
 
 .projectInfo {
   position: absolute;
+
   inset: auto 24px 22px 24px;
 
   display: flex;
+
   align-items: flex-end;
+
   justify-content: space-between;
 
   color: #ffffff;
@@ -368,6 +415,7 @@
 .projectCard:hover .projectInfo,
 .projectCard.active .projectInfo {
   transform: translateY(0);
+
   opacity: 1;
 }
 
@@ -377,6 +425,7 @@
   margin-bottom: 7px;
 
   font-family: monospace;
+
   font-size: 11px;
 
   opacity: 0.65;
@@ -386,6 +435,7 @@
   margin: 0;
 
   font-size: clamp(22px, 2vw, 30px);
+
   font-weight: 500;
 
   letter-spacing: -0.045em;
@@ -399,17 +449,19 @@
   opacity: 0.68;
 }
 
-
 /* =========================================================
    PROJECT ARROW
 ========================================================= */
 
 .projectArrow {
   width: 42px;
+
   height: 42px;
 
   display: flex;
+
   align-items: center;
+
   justify-content: center;
 
   border: 1px solid rgba(255, 255, 255, 0.35);
@@ -425,9 +477,9 @@
 
 .projectCard:hover .projectArrow {
   transform: rotate(45deg);
+
   background: rgba(255, 255, 255, 0.12);
 }
-
 
 /* =========================================================
    FOCUS
@@ -435,24 +487,44 @@
 
 .projectCard:focus-visible {
   outline: 2px solid #000000;
+
   outline-offset: 4px;
 }
 
-
 /* =========================================================
-   GITHUB
+   GITHUB — OUTER MAGNETIC BUTTON
 ========================================================= */
 
 .githubWrapper {
+  position: relative;
+
   display: flex;
+
+  align-items: center;
+
   justify-content: center;
 
-  margin-top: 52px;
+  width: fit-content;
+
+  margin: 52px auto 0;
+
+  /*
+   * Larger invisible magnetic zone around
+   * the actual button.
+   */
+
+  padding: 35px 60px;
+
+  overflow: visible;
+
+  cursor: pointer;
 }
 
 .githubButton {
   display: inline-flex;
+
   align-items: center;
+
   gap: 18px;
 
   padding: 13px 18px 13px 22px;
@@ -465,9 +537,24 @@
 
   font-size: 14px;
 
+  /*
+   * GSAP controls the transform.
+   */
+
+  will-change: transform;
+
   transition:
     background 300ms ease,
     color 300ms ease;
+}
+
+.githubButton span:first-child {
+  /*
+   * GSAP independently moves the
+   * label with lower magnetic strength.
+   */
+
+  will-change: transform;
 }
 
 .githubButton span:last-child {
@@ -476,41 +563,55 @@
 
 .githubButton:hover {
   background: #0d0d0d;
+
   color: #ffffff;
 }
 
 /* =========================================================
    PROJECT DETAIL DRAWER
-   ========================================================= */
+========================================================= */
 
 .projectDrawer {
   position: fixed;
+
   inset: 0;
+
   z-index: 200;
+
   pointer-events: none;
+
   visibility: hidden;
 }
 
 .projectBackdrop {
   position: absolute;
+
   inset: 0;
+
   background: rgba(0, 0, 0, 0.48);
+
   opacity: 0;
 }
 
 .projectDrawerInner {
   position: absolute;
+
   top: 0;
+
   right: 0;
 
   width: min(700px, 92vw);
+
   height: 100vh;
 
   padding: 16px;
 
   display: flex;
+
   flex-direction: column;
+
   align-items: flex-end;
+
   justify-content: center;
 
   gap: 8px;
@@ -518,29 +619,33 @@
   overflow: hidden;
 }
 
-
 /* =========================================================
    CLOSE BUTTON
-   ========================================================= */
+========================================================= */
 
 .projectClose {
   position: absolute;
 
   top: 24px;
+
   right: 24px;
 
   z-index: 20;
 
   width: 44px;
+
   height: 44px;
 
   display: flex;
+
   align-items: center;
+
   justify-content: center;
 
   padding: 0;
 
   border: 0;
+
   background: transparent;
 
   cursor: pointer;
@@ -550,15 +655,15 @@
   will-change: transform, opacity;
 }
 
-
 /* =========================================================
    MINIMAL CLOSE MARK
-   ========================================================= */
+========================================================= */
 
 .closeLine {
   position: absolute;
 
   width: 25px;
+
   height: 1.5px;
 
   border-radius: 999px;
@@ -576,7 +681,6 @@
     0 0 8px rgba(0, 0, 0, 0.35);
 }
 
-
 /*
  * Normal state:
  *
@@ -592,7 +696,6 @@
 .closeLine:last-child {
   transform: translateY(4px);
 }
-
 
 /*
  * Hover:
@@ -612,10 +715,9 @@
   transform: rotate(-45deg);
 }
 
-
 /* =========================================================
    SHARED PANELS
-   ========================================================= */
+========================================================= */
 
 .projectPanel {
   position: relative;
@@ -623,6 +725,7 @@
   width: 100%;
 
   border: 0;
+
   border-radius: 18px;
 
   overflow: hidden;
@@ -633,10 +736,9 @@
     0 18px 50px rgba(0, 0, 0, 0.14);
 }
 
-
 /* =========================================================
    IMAGE PANEL
-   ========================================================= */
+========================================================= */
 
 .projectImagePanel {
   height: min(46vh, 440px);
@@ -646,6 +748,7 @@
 
 .projectImagePanel img {
   width: 100%;
+
   height: 100%;
 
   display: block;
@@ -653,10 +756,9 @@
   object-fit: cover;
 }
 
-
 /* =========================================================
    DETAILS PANEL
-   ========================================================= */
+========================================================= */
 
 .projectDetailsPanel {
   min-height: 220px;
@@ -664,10 +766,13 @@
   padding: 32px;
 
   display: flex;
+
   flex-direction: column;
+
   justify-content: center;
 
   background: #ffffff;
+
   color: #0d0d0d;
 }
 
@@ -677,7 +782,9 @@
   color: #777777;
 
   font-family: monospace;
+
   font-size: 11px;
+
   letter-spacing: -0.02em;
 }
 
@@ -691,9 +798,11 @@
     sans-serif;
 
   font-size: clamp(42px, 5vw, 68px);
+
   font-weight: 400;
 
   line-height: 0.9;
+
   letter-spacing: -0.04em;
 }
 
@@ -701,6 +810,7 @@
   margin: 18px 0 0;
 
   font-size: 16px;
+
   font-weight: 500;
 
   letter-spacing: -0.02em;
@@ -714,21 +824,23 @@
   color: #555555;
 
   font-size: 14px;
+
   line-height: 1.5;
 
   letter-spacing: -0.015em;
 }
 
-
 /* =========================================================
    GITHUB PANEL
-   ========================================================= */
+========================================================= */
 
 .projectActionPanel {
   min-height: 100px;
 
   display: flex;
+
   align-items: center;
+
   justify-content: center;
 
   padding: 20px;
@@ -740,17 +852,21 @@
   width: 100%;
 
   display: flex;
+
   align-items: center;
+
   justify-content: space-between;
 
   padding: 18px 20px;
 
   border: 1px solid rgba(255, 255, 255, 0.18);
+
   border-radius: 999px;
 
   color: #ffffff;
 
   font-size: 14px;
+
   letter-spacing: -0.015em;
 
   background: transparent;
@@ -761,19 +877,21 @@
     color 350ms ease;
 }
 
-
 /* =========================================================
    GITHUB LEFT SIDE
-   ========================================================= */
+========================================================= */
 
 .githubButtonMain {
   display: flex;
+
   align-items: center;
+
   gap: 12px;
 }
 
 .githubIcon {
   width: 20px;
+
   height: 20px;
 
   flex-shrink: 0;
@@ -782,27 +900,28 @@
     transform 450ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-
 /* =========================================================
    ARROW
-   ========================================================= */
+========================================================= */
 
 .githubArrow {
   display: flex;
+
   align-items: center;
+
   justify-content: center;
 
   font-size: 20px;
+
   line-height: 1;
 
   transition:
     transform 450ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-
 /* =========================================================
    HOVER
-   ========================================================= */
+========================================================= */
 
 .projectGithubButton:hover {
   background: #ffffff;
@@ -820,14 +939,14 @@
   transform: rotate(45deg);
 }
 
-
 /* =========================================================
    MOBILE
-   ========================================================= */
+========================================================= */
 
 @media (max-width: 700px) {
   .projectDrawerInner {
     width: 100%;
+
     padding: 12px;
 
     gap: 7px;
@@ -835,9 +954,11 @@
 
   .projectClose {
     top: 20px;
+
     right: 20px;
 
     width: 42px;
+
     height: 42px;
 
     font-size: 26px;
@@ -849,6 +970,7 @@
 
   .projectDetailsPanel {
     min-height: 230px;
+
     padding: 24px;
   }
 
@@ -861,7 +983,6 @@
   }
 }
 
-
 /* =========================================================
    TABLET
 ========================================================= */
@@ -873,11 +994,13 @@
 
   .header {
     grid-template-columns: 1fr;
+
     gap: 35px;
   }
 
   .title {
     justify-self: start;
+
     text-align: left;
   }
 
@@ -894,27 +1017,31 @@
 
   .project1 {
     grid-column: 1 / 3;
+
     grid-row: 1;
   }
 
   .project2 {
     grid-column: 1;
+
     grid-row: 2 / 4;
   }
 
   .project3 {
     grid-column: 2;
+
     grid-row: 2;
   }
 
   .project4 {
     grid-column: 2;
+
     grid-row: 3;
   }
 
-
   /* =======================================================
      TABLET ACTIVE LAYOUTS
+
      Keep the same safe 2-column structure.
   ======================================================= */
 
@@ -935,6 +1062,7 @@
   .activeCiphernote .project1,
   .activePortfolio .project1 {
     grid-column: 1 / 3;
+
     grid-row: 1;
   }
 
@@ -943,6 +1071,7 @@
   .activeCiphernote .project2,
   .activePortfolio .project2 {
     grid-column: 1;
+
     grid-row: 2 / 4;
   }
 
@@ -951,6 +1080,7 @@
   .activeCiphernote .project3,
   .activePortfolio .project3 {
     grid-column: 2;
+
     grid-row: 2;
   }
 
@@ -959,10 +1089,10 @@
   .activeCiphernote .project4,
   .activePortfolio .project4 {
     grid-column: 2;
+
     grid-row: 3;
   }
 }
-
 
 /* =========================================================
    SMALL MOBILE
@@ -986,6 +1116,7 @@
   /*
    * No desktop expansion layout on small screens.
    */
+
   .activeCampusflow,
   .activeDeeptrust,
   .activeCiphernote,
@@ -999,6 +1130,18 @@
 
   .projectInfo {
     opacity: 1;
+
     transform: none;
+  }
+
+  /*
+   * Smaller magnetic area on phones.
+   * The JS magnetic interaction is still
+   * disabled naturally when there is no
+   * mouse interaction.
+   */
+
+  .githubWrapper {
+    padding: 25px 35px;
   }
 }
