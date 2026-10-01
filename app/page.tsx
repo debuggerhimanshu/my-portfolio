@@ -4,6 +4,7 @@ import { Hero } from "@/components/sections/Hero/Hero";
 import { About } from "@/components/sections/About/About";
 import { Education } from "@/components/sections/Education/Education";
 import { EducationStory } from "@/components/sections/EducationStory/EducationStory";
+import { Toolchain } from "@/components/sections/Toolchain/Toolchain";
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
           <About />
           <Education />
           <EducationStory />
+          <Toolchain />
       </main>
     </PageFrame>
   );
