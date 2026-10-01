@@ -1,86 +1,11 @@
 .projects {
   position: relative;
-
   width: 100vw;
   margin-left: calc(50% - 50vw);
-
-  padding: 0 7vw 100px;
-
+  padding: 90px 7vw 120px;
   background: #ffffff;
   color: #0d0d0d;
-}
-
-/* ─────────────────────────────
-   TOP BORDER
-───────────────────────────── */
-
-.topBorder {
-  width: 100%;
-
-  border-top: 1px solid rgba(255, 255, 255, 0.18);
-}
-
-/* ─────────────────────────────
-   HEADER
-───────────────────────────── */
-
-.header {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: end;
-
-  width: min(1380px, 100%);
-  margin: 0 auto;
-
-  padding-top: 50px;
-  padding-bottom: 42px;
-}
-
-
-.headerCopy {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.eyebrow {
-  margin-bottom: 10px;
-  color: rgb(67, 67, 67);
-  font-family: monospace;
-  font-size: 12px;
-  letter-spacing: -0.02em;
-}
-
-.description {
-  width: 100%;
-  max-width: 560px;
-
-  margin: 0;
-  padding-right: 0;
-
-  color: #323232;
-
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: clamp(17px, 1.45vw, 21px);
-  font-weight: 400;
-  line-height: 1.25;
-  letter-spacing: -0.035em;
-}
-
-.title {
-  margin: 0;
-
-  color: inherit;
-
-  font-family: "Harabara", Arial, Helvetica, sans-serif;
-  font-size: clamp(48px, 4.8vw, 68px);
-  font-weight: 400;
-  line-height: 0.95;
-
-  justify-self: end;
-  align-self: end;
-
-  text-align: right;
+  overflow: hidden;
 }
 
 .projects ::selection {
@@ -88,34 +13,255 @@
   color: #ffffff;
 }
 
-/* ─────────────────────────────
-   PROJECT GRID
-───────────────────────────── */
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header {
+  width: min(1380px, 100%);
+  margin: 0 auto 60px;
+
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+}
+
+.headerCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.eyebrow {
+  color: #555555;
+  font-family: monospace;
+  font-size: 12px;
+  letter-spacing: -0.02em;
+}
+
+.description {
+  max-width: 520px;
+  margin: 0;
+
+  color: #333333;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(17px, 1.4vw, 21px);
+  line-height: 1.25;
+  letter-spacing: -0.035em;
+}
+
+.title {
+  margin: 0;
+
+  font-family: "Harabara", Arial, Helvetica, sans-serif;
+  font-size: clamp(48px, 4.8vw, 68px);
+  font-weight: 400;
+  line-height: 0.95;
+  text-align: right;
+}
+
+
+/* =========================================================
+   BENTO GRID
+========================================================= */
 
 .projectGrid {
-  width: min(1320px, 100%);
-
+  width: min(1380px, 100%);
+  height: clamp(500px, 60vh, 560px);
   margin: 0 auto;
 
   display: grid;
 
   grid-template-columns:
-    minmax(0, 2.2fr)
-    minmax(0, 0.78fr)
-    minmax(0, 1.15fr);
+    minmax(0, 1.35fr)
+    minmax(0, 0.9fr)
+    minmax(0, 0.75fr);
 
   grid-template-rows:
-    1fr
-    1fr;
+    minmax(0, 1fr)
+    minmax(0, 1fr);
 
-  gap: 14px;
-
-  height: 500px;
+  gap: 12px;
 }
 
-/* ─────────────────────────────
-   CARDS
-───────────────────────────── */
+
+/* =========================================================
+   DEFAULT CARD POSITIONS
+========================================================= */
+
+.project1 {
+  grid-column: 1;
+  grid-row: 1 / 3;
+}
+
+.project2 {
+  grid-column: 2;
+  grid-row: 1 / 3;
+}
+
+.project3 {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.project4 {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+
+/* =========================================================
+   ACTIVE — CAMPUSFLOW
+   P1 becomes dominant
+========================================================= */
+
+.activeCampusflow {
+  grid-template-columns:
+    minmax(0, 1.85fr)
+    minmax(0, 0.65fr)
+    minmax(0, 0.5fr);
+
+  grid-template-rows:
+    minmax(0, 1fr)
+    minmax(0, 1fr);
+}
+
+.activeCampusflow .project1 {
+  grid-column: 1;
+  grid-row: 1 / 3;
+}
+
+.activeCampusflow .project2 {
+  grid-column: 2;
+  grid-row: 1 / 3;
+}
+
+.activeCampusflow .project3 {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.activeCampusflow .project4 {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+
+/* =========================================================
+   ACTIVE — DEEPTRUST
+   P2 becomes dominant
+========================================================= */
+
+.activeDeeptrust {
+  grid-template-columns:
+    minmax(0, 0.5fr)
+    minmax(0, 1.85fr)
+    minmax(0, 0.65fr);
+
+  grid-template-rows:
+    minmax(0, 1fr)
+    minmax(0, 1fr);
+}
+
+.activeDeeptrust .project1 {
+  grid-column: 1;
+  grid-row: 1 / 3;
+}
+
+.activeDeeptrust .project2 {
+  grid-column: 2;
+  grid-row: 1 / 3;
+}
+
+.activeDeeptrust .project3 {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.activeDeeptrust .project4 {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+
+/* =========================================================
+   ACTIVE — CIPHERNOTE
+   P3 becomes dominant
+========================================================= */
+
+.activeCiphernote {
+  grid-template-columns:
+    minmax(0, 0.65fr)
+    minmax(0, 0.5fr)
+    minmax(0, 1.85fr);
+
+  grid-template-rows:
+    minmax(0, 1fr)
+    minmax(0, 1fr);
+}
+
+.activeCiphernote .project1 {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.activeCiphernote .project2 {
+  grid-column: 2;
+  grid-row: 1 / 3;
+}
+
+.activeCiphernote .project3 {
+  grid-column: 3;
+  grid-row: 1 / 3;
+}
+
+.activeCiphernote .project4 {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+
+/* =========================================================
+   ACTIVE — PORTFOLIO
+   P4 becomes dominant
+========================================================= */
+
+.activePortfolio {
+  grid-template-columns:
+    minmax(0, 0.65fr)
+    minmax(0, 0.5fr)
+    minmax(0, 1.85fr);
+
+  grid-template-rows:
+    minmax(0, 1fr)
+    minmax(0, 1fr);
+}
+
+.activePortfolio .project1 {
+  grid-column: 1;
+  grid-row: 1 / 3;
+}
+
+.activePortfolio .project2 {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.activePortfolio .project3 {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.activePortfolio .project4 {
+  grid-column: 3;
+  grid-row: 1 / 3;
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
 
 .projectCard {
   position: relative;
@@ -125,186 +271,352 @@
 
   overflow: hidden;
 
-  border-radius: 20px;
+  border-radius: 22px;
 
-  background: #d8d8d8;
+  background: #dedede;
+
+  cursor: pointer;
+
+  outline: none;
+
+  /*
+   * Flip handles the geometry.
+   * Do not add scale transforms here.
+   */
+  will-change: transform;
 }
 
-/* Large left card */
 
-.projectLarge {
-  grid-column: 1;
-  grid-row: 1 / 3;
+/* =========================================================
+   IMAGE
+========================================================= */
+
+.imageWrapper {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
 }
 
-/* Tall middle card */
+.projectImage {
+  width: 100%;
+  height: 100%;
 
-.projectTall {
-  grid-column: 2;
-  grid-row: 1 / 3;
+  display: block;
+
+  object-fit: cover;
+
+  /*
+   * Keep the image stable while Flip
+   * changes the card geometry.
+   */
+  transform: scale(1);
 }
 
-/* Top-right */
 
-.projectSmall:nth-child(3) {
-  grid-column: 3;
-  grid-row: 1;
-}
+/* =========================================================
+   OVERLAY
+========================================================= */
 
-/* Bottom-right */
-
-.projectSmall:nth-child(4) {
-  grid-column: 3;
-  grid-row: 2;
-}
-
-/* ─────────────────────────────
-   PLACEHOLDER
-───────────────────────────── */
-
-.projectPlaceholder {
+.imageOverlay {
   position: absolute;
-
   inset: 0;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.03) 30%,
+      rgba(0, 0, 0, 0.78) 100%
+    );
+
+  opacity: 0.7;
+
+  transition: opacity 500ms ease;
+}
+
+.projectCard:hover .imageOverlay,
+.projectCard.active .imageOverlay {
+  opacity: 0.9;
+}
+
+
+/* =========================================================
+   PROJECT INFORMATION
+========================================================= */
+
+.projectInfo {
+  position: absolute;
+  inset: auto 24px 22px 24px;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  color: #ffffff;
+
+  transform: translateY(8px);
+
+  opacity: 0;
+
+  transition:
+    transform 500ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 400ms ease;
+}
+
+.projectCard:hover .projectInfo,
+.projectCard.active .projectInfo {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.projectNumber {
+  display: block;
+
+  margin-bottom: 7px;
+
+  font-family: monospace;
+  font-size: 11px;
+
+  opacity: 0.65;
+}
+
+.projectInfo h3 {
+  margin: 0;
+
+  font-size: clamp(22px, 2vw, 30px);
+  font-weight: 500;
+
+  letter-spacing: -0.045em;
+}
+
+.projectInfo p {
+  margin: 5px 0 0;
+
+  font-size: 13px;
+
+  opacity: 0.68;
+}
+
+
+/* =========================================================
+   PROJECT ARROW
+========================================================= */
+
+.projectArrow {
+  width: 42px;
+  height: 42px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  color: rgba(13, 13, 13, 0);
+  border: 1px solid rgba(255, 255, 255, 0.35);
 
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 16px;
+  border-radius: 50%;
 
-  background: #d8d8d8;
+  font-size: 19px;
+
+  transition:
+    transform 400ms cubic-bezier(0.16, 1, 0.3, 1),
+    background 300ms ease;
 }
 
-/* ─────────────────────────────
+.projectCard:hover .projectArrow {
+  transform: rotate(45deg);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+
+/* =========================================================
+   FOCUS
+========================================================= */
+
+.projectCard:focus-visible {
+  outline: 2px solid #000000;
+  outline-offset: 4px;
+}
+
+
+/* =========================================================
    GITHUB
-───────────────────────────── */
+========================================================= */
 
 .githubWrapper {
   display: flex;
   justify-content: center;
 
-  padding-top: 42px;
+  margin-top: 52px;
 }
 
 .githubButton {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
+  gap: 18px;
 
-  width: 330px;
-  height: 88px;
+  padding: 13px 18px 13px 22px;
+
+  border: 1px solid rgba(0, 0, 0, 0.18);
 
   border-radius: 999px;
 
-  background: #d8d8d8;
   color: #0d0d0d;
 
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 24px;
-  font-weight: 400;
+  font-size: 14px;
 
   transition:
-    transform 250ms ease,
-    background 250ms ease;
+    background 300ms ease,
+    color 300ms ease;
+}
+
+.githubButton span:last-child {
+  font-size: 17px;
 }
 
 .githubButton:hover {
-  transform: translateY(-4px);
-
-  background: #eeeeee;
+  background: #0d0d0d;
+  color: #ffffff;
 }
 
-/* ─────────────────────────────
+
+/* =========================================================
    TABLET
-───────────────────────────── */
+========================================================= */
 
 @media (max-width: 900px) {
   .projects {
-    padding: 0 5vw 90px;
+    padding: 70px 20px 90px;
   }
 
   .header {
-    padding: 45px 0 45px;
-  }
-
-  .projectGrid {
-    height: 450px;
-
-    grid-template-columns:
-      minmax(0, 1.8fr)
-      minmax(0, 0.8fr)
-      minmax(0, 1.1fr);
-  }
-
-  .githubButton {
-    width: 280px;
-    height: 72px;
-
-    font-size: 21px;
-  }
-}
-
-/* ─────────────────────────────
-   MOBILE
-───────────────────────────── */
-
-@media (max-width: 650px) {
-  .projects {
-    padding: 0 18px 70px;
-  }
-
-  .header {
-    padding: 38px 0 32px;
+    grid-template-columns: 1fr;
+    gap: 35px;
   }
 
   .title {
-    font-size: clamp(58px, 18vw, 86px);
+    justify-self: start;
+    text-align: left;
   }
 
   .projectGrid {
     height: auto;
 
-    grid-template-columns: 1fr;
+    grid-template-columns:
+      1fr
+      1fr;
 
-    grid-template-rows: none;
+    grid-template-rows:
+      repeat(3, 280px);
+  }
 
-    gap: 12px;
+  .project1 {
+    grid-column: 1 / 3;
+    grid-row: 1;
+  }
+
+  .project2 {
+    grid-column: 1;
+    grid-row: 2 / 4;
+  }
+
+  .project3 {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .project4 {
+    grid-column: 2;
+    grid-row: 3;
+  }
+
+
+  /* =======================================================
+     TABLET ACTIVE LAYOUTS
+     Keep the same safe 2-column structure.
+  ======================================================= */
+
+  .activeCampusflow,
+  .activeDeeptrust,
+  .activeCiphernote,
+  .activePortfolio {
+    grid-template-columns:
+      1fr
+      1fr;
+
+    grid-template-rows:
+      repeat(3, 280px);
+  }
+
+  .activeCampusflow .project1,
+  .activeDeeptrust .project1,
+  .activeCiphernote .project1,
+  .activePortfolio .project1 {
+    grid-column: 1 / 3;
+    grid-row: 1;
+  }
+
+  .activeCampusflow .project2,
+  .activeDeeptrust .project2,
+  .activeCiphernote .project2,
+  .activePortfolio .project2 {
+    grid-column: 1;
+    grid-row: 2 / 4;
+  }
+
+  .activeCampusflow .project3,
+  .activeDeeptrust .project3,
+  .activeCiphernote .project3,
+  .activePortfolio .project3 {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .activeCampusflow .project4,
+  .activeDeeptrust .project4,
+  .activeCiphernote .project4,
+  .activePortfolio .project4 {
+    grid-column: 2;
+    grid-row: 3;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+  .projectGrid {
+    display: flex;
+
+    flex-direction: column;
+
+    height: auto;
+
+    gap: 10px;
   }
 
   .projectCard {
-    min-height: 260px;
+    height: 330px;
   }
 
-  .projectLarge,
-  .projectTall,
-  .projectSmall:nth-child(3),
-  .projectSmall:nth-child(4) {
-    grid-column: auto;
-    grid-row: auto;
+  /*
+   * No desktop expansion layout on small screens.
+   */
+  .activeCampusflow,
+  .activeDeeptrust,
+  .activeCiphernote,
+  .activePortfolio {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
   }
 
-  .projectLarge {
-    min-height: 360px;
-  }
-
-  .projectTall {
-    min-height: 360px;
-  }
-
-  .githubWrapper {
-    padding-top: 30px;
-  }
-
-  .githubButton {
-    width: 100%;
-    max-width: 330px;
-
-    height: 68px;
-
-    font-size: 20px;
+  .projectInfo {
+    opacity: 1;
+    transform: none;
   }
 }
