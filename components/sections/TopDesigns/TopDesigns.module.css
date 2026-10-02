@@ -1,0 +1,131 @@
+
+.section {
+  position: relative;
+  width: 100%;
+  padding: 110px 0 0;
+  overflow: clip;
+}
+
+.heading {
+  padding: 0 5%;
+  margin-bottom: 48px;
+}
+
+.eyebrow {
+  margin-bottom: 10px;
+  color: rgb(247, 247, 247);
+  font-family: monospace;
+  font-size: 12px;
+  letter-spacing: -0.02em;
+}
+
+.title {
+  margin: 0;
+
+  color: inherit;
+
+  font-family: "Harabara", Arial, Helvetica, sans-serif;
+  font-size: clamp(48px, 4.8vw, 68px);
+  font-weight: 400;
+  line-height: 0.95;
+
+  justify-self: end;
+  align-self: end;
+
+  text-align: right;
+}
+
+.description {
+  width: 100%;
+  max-width: 560px;
+
+  margin: 0;
+  padding-right: 0;
+
+  color: #fefefe;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(17px, 1.45vw, 21px);
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: -0.035em;
+}
+
+
+
+.galleryViewport {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.galleryStrip {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 28px;
+  width: max-content;
+  padding: 0 5%;
+  will-change: transform;
+}
+
+.project {
+  flex: 0 0 auto;
+  height: 62vh;
+  height: 62svh;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.imageFrame {
+  height: 100%;
+  width: auto;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.imageFrame img {
+  display: block;
+  height: 100%;
+  width: auto;
+  max-width: none;
+  object-fit: contain;
+  object-position: center;
+  user-select: none;
+  pointer-events: none;
+}
+
+.projectInfo {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 14px;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.75;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .galleryViewport {
+    height: 82svh;
+  }
+
+  .galleryStrip {
+    gap: 18px;
+    padding: 0 6%;
+  }
+
+  .project {
+    height: 58svh;
+  }
+}

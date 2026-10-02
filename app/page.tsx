@@ -8,6 +8,7 @@ import { EducationStory } from "@/components/sections/EducationStory/EducationSt
 import { Toolchain } from "@/components/sections/Toolchain/Toolchain";
 import AchievementsScroll from "@/components/sections/AchievementsScroll";
 import Achievements from "@/components/sections/Achievements/Achievements";
+import TopDesigns from "@/components/sections/TopDesigns/TopDesigns";
 
 
 
@@ -27,6 +28,7 @@ export default function Home() {
           <Toolchain />
           <AchievementsScroll />
           <Achievements />
+          <TopDesigns />
       </main>
     </PageFrame>
   );
