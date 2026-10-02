@@ -6,6 +6,10 @@ import { Projects } from "@/components/sections/Projects/Projects";
 import { Education } from "@/components/sections/Education/Education";
 import { EducationStory } from "@/components/sections/EducationStory/EducationStory";
 import { Toolchain } from "@/components/sections/Toolchain/Toolchain";
+import AchievementsScroll from "@/components/sections/AchievementsScroll";
+
+
+
 
 export default function Home() {
   return (
@@ -19,6 +23,7 @@ export default function Home() {
           <Education />
           <EducationStory />
           <Toolchain />
+          <AchievementsScroll />
       </main>
     </PageFrame>
   );
