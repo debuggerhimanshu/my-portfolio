@@ -115,23 +115,28 @@ export default function AchievementsScroll() {
       });
 
       // Horizontal scrolling text.
-      const getTravelDistance = () =>
-        Math.max(0, text.scrollWidth - window.innerWidth);
+      const getTravelDistance = () => {
+        const textWidth = text.scrollWidth;
+        const viewportWidth = section.clientWidth;
 
-      const scrollTween = gsap.to(text, {
+        // Move the complete text off the left edge.
+        return textWidth;
+        };
+
+        const scrollTween = gsap.to(text, {
         x: () => -getTravelDistance(),
         ease: "none",
         scrollTrigger: {
-          trigger: section,
-          pin: true,
-          start: "top top",
-          end: () =>
-            `+=${Math.max(getTravelDistance(), window.innerWidth)}`,
-          scrub: 1,
-          invalidateOnRefresh: true,
-          anticipatePin: 1,
+            trigger: section,
+            pin: true,
+            pinSpacing: true,
+            start: "top top",
+            end: () => `+=${getTravelDistance()}`,
+            scrub: 1,
+            invalidateOnRefresh: true,
+            anticipatePin: 1,
         },
-      });
+        });
 
       // Character-by-character scroll animation.
       split.chars.forEach((char) => {
