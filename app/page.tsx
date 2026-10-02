@@ -9,6 +9,7 @@ import { Toolchain } from "@/components/sections/Toolchain/Toolchain";
 import AchievementsScroll from "@/components/sections/AchievementsScroll";
 import Achievements from "@/components/sections/Achievements/Achievements";
 import TopDesigns from "@/components/sections/TopDesigns/TopDesigns";
+import Contact from "@/components/sections/Contact/Contact";
 
 
 
@@ -29,6 +30,7 @@ export default function Home() {
           <AchievementsScroll />
           <Achievements />
           <TopDesigns />
+          <Contact />
       </main>
     </PageFrame>
   );
