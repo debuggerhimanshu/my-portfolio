@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import styles from "./Hero.module.css";
+import gsap from "gsap";
 
 import {
   SiGithub,
@@ -61,6 +62,41 @@ const projects = [
   },
 ];
 
+
+const scrambleText = (element: HTMLElement) => {
+  const originalText = element.dataset.text || element.textContent || "";
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%";
+  let frame = 0;
+
+  gsap.killTweensOf(element);
+
+  const state = { progress: 0 };
+
+  gsap.to(state, {
+    progress: 1,
+    duration: 0.7,
+    ease: "none",
+    onUpdate: () => {
+      const resolvedCount = Math.floor(
+        state.progress * originalText.length
+      );
+
+      element.textContent = originalText
+        .split("")
+        .map((char, index) => {
+          if (char === " " || index < resolvedCount) return char;
+
+          return chars[Math.floor(Math.random() * chars.length)];
+        })
+        .join("");
+    },
+    onComplete: () => {
+      element.textContent = originalText;
+    },
+  });
+};
+
+
 export function Hero() {
   const [activeProject, setActiveProject] = useState(0);
 
@@ -97,11 +133,24 @@ export function Hero() {
           </span>
         </h1>
 
-        <a href="#projects" className={styles.projectsButton}>
-          <span>Projects</span>
+                  
+          <a
+            href="#projects"
+            className={styles.projectsButton}
+            onMouseEnter={(event) => {
+              const text = event.currentTarget.querySelector(
+                "[data-scramble]"
+              );
 
-          <span className={styles.buttonArrow}>→</span>
-        </a>
+              if (text instanceof HTMLElement) {
+                scrambleText(text);
+              }
+            }}
+          >
+            <span data-scramble>See My Resume</span>
+            <span className={styles.buttonArrow}>→</span>
+          </a>
+
       </div>
 
       {/* Social links */}

@@ -5,6 +5,8 @@
   overflow: hidden;
 }
 
+
+
 /* --------------------------------
    Heading
 -------------------------------- */
@@ -61,6 +63,17 @@
 /* --------------------------------
    Projects button
 -------------------------------- */
+
+
+.buttonArrow {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.projectsButton:hover .buttonArrow {
+  transform: translateX(5px);
+}
+
 
 .projectsButton {
   position: absolute;
