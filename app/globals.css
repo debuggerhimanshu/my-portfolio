@@ -88,3 +88,10 @@ a {
 ::-webkit-scrollbar-thumb:hover {
   background: #454545;
 }
+
+
+@media (max-width: 700px) {
+  .hide-on-mobile {
+    display: none !important;
+  }
+}

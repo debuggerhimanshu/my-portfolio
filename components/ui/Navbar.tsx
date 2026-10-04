@@ -25,7 +25,11 @@ export function Navbar() {
       </nav>
 
       <a href="#contact" className={styles.profile} aria-label="Contact">
-        <span className={styles.profilePlaceholder} />
+            <img
+    src="/profile.png"
+    alt="Himanshu Ranjan"
+    className={styles.profileImage}
+  />
       </a>
     </header>
   );

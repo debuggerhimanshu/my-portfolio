@@ -54,26 +54,21 @@
 
 /* Right */
 
+
+/* Profile image */
 .profile {
   justify-self: end;
 
   width: 32px;
   height: 32px;
+  flex-shrink: 0;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
   overflow: hidden;
-
   border-radius: 50%;
-
-  background: #969696;
-}
-.profilePlaceholder {
-  width: 100%;
-  height: 100%;
-  display: block;
   background: #969696;
 }
 
@@ -82,8 +77,23 @@
   height: 100%;
 
   object-fit: cover;
-  display: block;
+  object-position: center 25%;
+
+  border-radius: 50%;
 }
+
+/* Mobile */
+@media (max-width: 700px) {
+  .profile {
+    width: 40px;
+    height: 40px;
+  }
+
+  .profile img {
+    object-position: center 65%;
+  }
+}
+
 
 /* Tablet */
 
@@ -107,10 +117,19 @@
 
 /* Mobile */
 
+
 @media (max-width: 700px) {
   .navbar {
     height: 64px;
-    padding: 0 16px;
+    padding: 0 20px;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .brand {
+    font-size: 14px;
+    min-width: 0;
   }
 
   .navigation {
@@ -118,7 +137,16 @@
   }
 
   .profile {
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    justify-self: end;
+  }
+
+  .profile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
   }
 }

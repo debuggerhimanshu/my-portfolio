@@ -25,11 +25,28 @@ export default function Home() {
           <About />
           <Projects />
           <Education />
+
+          <div className="hide-on-mobile">
           <EducationStory />
+          </div>
+
+          <div className="hide-on-mobile">
           <Toolchain />
+          </div>
+
+          <div className="hide-on-mobile">
           <AchievementsScroll />
+          </div>
+
+          <div className="hide-on-mobile">
           <Achievements />
+          </div>
+
+          <div className="hide-on-mobile">
           <TopDesigns />
+          </div>
+          
+
           <Contact />
       </main>
     </PageFrame>
