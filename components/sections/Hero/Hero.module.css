@@ -556,83 +556,142 @@
 }
 
 /* =========================================================
-   MOBILE
+   MOBILE RESPONSIVE
 ========================================================= */
 
 @media (max-width: 700px) {
   .hero {
     min-height: auto;
+    padding: 54px 20px 44px;
+    overflow: hidden;
+  }
 
-    padding: 70px 18px 50px;
+  /* Heading */
+  .headingArea {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
   }
 
   .heading {
-    font-size: clamp(58px, 17vw, 100px);
+    order: 1;
+    width: 100%;
+    margin-top: 24px;
+    font-size: clamp(48px, 12.8vw, 76px);
+    line-height: 0.9;
+    letter-spacing: -0.075em;
+    overflow: visible;
+  }
+
+  .firstLine,
+  .secondLine {
+    white-space: nowrap;
+  }
+
+  .firstLine {
+    text-align: left;
   }
 
   .secondLine {
     text-align: right;
   }
 
+  /* Description */
   .description {
     position: static;
-
+    order: 0;
     width: 100%;
-    max-width: 340px;
+    max-width: 360px;
+    margin: 0;
+  }
 
+  .description p {
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  /* Resume / Projects button */
+  .projectsButton {
+    position: static;
+    order: 2;
+    align-self: flex-start;
+    width: fit-content;
+    gap: 10px;
     margin-top: 28px;
   }
 
-  .projectsButton {
-    position: static;
-
-    width: fit-content;
-
-    margin-top: 30px;
-  }
-
   .projectsButton > span:first-child {
-    width: 170px;
+    width: 190px;
+    height: 48px;
+    font-size: 13px;
   }
 
+  .buttonArrow {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+  }
+
+  /* Social links */
   .socials {
-    justify-content: flex-start;
-
-    flex-wrap: wrap;
-
-    margin-top: 50px;
+    display: grid;
+    grid-template-columns: max-content max-content;
+    justify-content: start;
+    align-items: center;
     gap: 10px;
+    margin-top: 36px;
   }
 
-  /* --------------------------------
-     Mobile carousel
-  -------------------------------- */
+  .social {
+    min-height: 44px;
+    height: auto;
+    padding: 0 15px;
+    gap: 8px;
+    font-size: 12px;
+    white-space: nowrap;
+  }
 
+  .socialIcon {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* Project carousel */
   .projectCarousel {
-    height: 330px;
-    margin-top: 48px;
+    width: 100%;
+    height: 300px;
+    margin-top: 40px;
+  }
+
+  .projectViewport {
+    overflow: hidden;
+    border-radius: 22px;
   }
 
   .projectCard {
-    left: 5%;
-    width: 90%;
-
-    display: block;
+    left: 0;
+    width: 100%;
+    border-radius: 22px;
   }
 
   .projectCard:not(.projectCardActive) {
     opacity: 0;
+    pointer-events: none;
   }
 
-  .projectCardActive .projectImage {
-    display: block;
+  .projectCardActive {
+    opacity: 1;
   }
 
   .projectOverlay {
+    width: 100%;
+    height: 100%;
+    left: 0;
+    right: auto;
     background: linear-gradient(
       180deg,
-      rgba(0, 0, 0, 0.05) 0%,
-      rgba(0, 0, 0, 0.25) 35%,
+      rgba(0, 0, 0, 0.02) 0%,
+      rgba(0, 0, 0, 0.18) 38%,
       rgba(0, 0, 0, 0.88) 100%
     );
   }
@@ -640,32 +699,77 @@
   .projectContent {
     width: 100%;
     height: 100%;
-
-    padding: 24px;
-
+    padding: 22px;
     justify-content: flex-end;
   }
 
   .projectContent h3 {
-    font-size: 22px;
+    font-size: 23px;
   }
 
   .projectContent p {
+    max-width: 290px;
+    margin-top: 8px;
     font-size: 12px;
+    line-height: 1.5;
   }
 
-  .sliderButton {
-    width: 46px;
-    height: 46px;
+  .projectActions {
+    margin-top: 15px;
+    gap: 8px;
+  }
 
-    font-size: 16px;
+  .viewProject {
+    height: 38px;
+    padding: 0 18px;
+  }
+
+  .projectArrow {
+    width: 38px;
+    height: 38px;
+  }
+
+  /* Carousel navigation */
+  .sliderButton {
+    width: 40px;
+    height: 40px;
+    font-size: 15px;
   }
 
   .sliderButtonLeft {
-    left: -4px;
+    left: 8px;
   }
 
   .sliderButtonRight {
-    right: -4px;
+    right: 8px;
+  }
+}
+
+/* Extra-small phones */
+@media (max-width: 380px) {
+  .hero {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .heading {
+    font-size: clamp(43px, 12.5vw, 48px);
+  }
+
+  .projectsButton > span:first-child {
+    width: 165px;
+  }
+
+  .social {
+    padding: 0 11px;
+    font-size: 11px;
+  }
+
+  .projectCarousel {
+    height: 270px;
+  }
+
+  .projectContent {
+    padding: 18px;
   }
 }

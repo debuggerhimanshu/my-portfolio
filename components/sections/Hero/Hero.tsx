@@ -16,17 +16,17 @@ import { FaLinkedinIn } from "react-icons/fa6";
 const socials = [
   {
     label: "Github",
-    href: "#",
+    href: "https://github.com/debuggerhimanshu",
     icon: SiGithub,
   },
   {
     label: "LinkedIn",
-    href: "#",
+    href: "https://www.linkedin.com/in/creativehim/",
     icon: FaLinkedinIn,
   },
   {
     label: "Instagram",
-    href: "#",
+    href: "https://www.instagram.com/creative.him/",
     icon: SiInstagram,
   },
   {
@@ -36,7 +36,7 @@ const socials = [
   },
   {
     label: "YouTube",
-    href: "#",
+    href: "https://www.youtube.com/@zodiacmotion",
     icon: SiYoutube,
   },
 ];
